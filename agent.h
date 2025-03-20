@@ -3,4 +3,4 @@
 #include "models.h"
 #include "store.h"
 
-void agent_menu(User* user);
+void agent_menu();

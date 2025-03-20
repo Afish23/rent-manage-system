@@ -1,7 +1,7 @@
 //中介功能实现
 #include "agent.h"
 
-void agent_menu(User* user) {
+void agent_menu() {
     while (1) {
 		printf("*********功能菜单*********\n");
 		printf("**                      **\n");

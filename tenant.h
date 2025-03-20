@@ -3,4 +3,4 @@
 #include "models.h"
 #include "store.h"
 
-void tenant_menu(User* user);
+void tenant_menu();

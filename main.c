@@ -5,9 +5,11 @@
 #include "store.h"
 #include "models.h"
 int main() {
-    load_data();
+    
+    int choice_0 = 1, choice_1, choice_2, choice_3, choice_4;
 
-    while (1) {
+    //主界面
+    while (choice_0) {
         printf("******登    录******\n");
         printf("**                **\n");
         printf("**0.  关    闭    **\n");
@@ -16,6 +18,37 @@ int main() {
         printf("**                **\n");
         printf("********************\n");
         printf("请选择功能：");
+        scanf_s("%d", &choice_0);
+        clear();
+
+        switch (choice_0) {
+        case 0:
+            break;
+        case 1:
+            //身份选择界面
+            printf("******身份选择******\n");
+            printf("**                **\n");
+            printf("**0.  退    出    **\n");
+            printf("**1.  管 理 员    **\n");
+            printf("**2.  中    介    **\n");
+            printf("**3.  租    客    **\n");
+            printf("**                **\n");
+            printf("********************\n");
+            printf("请选择身份：");
+            scanf_s("%d", &choice_1);
+            clear();
+            switch (choice_1)
+            {
+            case 0:
+                break;
+            case 1:
+                admin_menu();
+            case 2:
+                agent_menu();
+            case 3:
+                tenant_menu();
+            }
+        }
     }
     return 0;
 }
