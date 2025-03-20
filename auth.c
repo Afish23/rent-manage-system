@@ -6,5 +6,5 @@ User* login() {
 }
 
 void register_user() {
-    int a;
+	int a;
 }
