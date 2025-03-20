@@ -1,4 +1,4 @@
-//管理员功能声明test
+//管理员功能声明
 #pragma once
 #include "models.h"
 #include "store.h"
