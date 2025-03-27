@@ -18,36 +18,15 @@
     <ClInclude Include="models.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="store.h">
+    <ClInclude Include="data.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="auth.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="admin.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="agent.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="tenant.h">
+    <ClInclude Include="utils.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="store.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="auth.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="admin.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="agent.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="tenant.c">
+    <ClCompile Include="data.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.c">
@@ -56,5 +35,10 @@
     <ClCompile Include="utils.c">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="user.bin">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
