@@ -130,6 +130,7 @@
     <ClInclude Include="admin.h" />
     <ClInclude Include="agent.h" />
     <ClInclude Include="auth.h" />
+    <ClInclude Include="inquire.h" />
     <ClInclude Include="models.h" />
     <ClInclude Include="store.h" />
     <ClInclude Include="tenant.h" />
@@ -138,6 +139,7 @@
     <ClCompile Include="admin.c" />
     <ClCompile Include="agent.c" />
     <ClCompile Include="auth.c" />
+    <ClCompile Include="inquire.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="store.c" />
     <ClCompile Include="tenant.c" />
