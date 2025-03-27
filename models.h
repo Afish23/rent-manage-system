@@ -20,8 +20,8 @@ typedef struct {
     char community[20];//所在小区
     int floor;//楼层
     enum Toward toward;//朝向
-    int room;//几室
-    int hall;//几厅
+    int room;//室
+    int hall;//厅
     float Area;//面积
     char fitment[10];//装修情况
     char number[9];//编号
