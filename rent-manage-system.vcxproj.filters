@@ -24,6 +24,12 @@
     <ClInclude Include="inquire.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="crud.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="auth.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -39,6 +45,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="utils.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="crud.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="auth.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

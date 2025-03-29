@@ -27,9 +27,9 @@ struct House{
     int id;//房间号
     char houseowner[10];//房主名字
     int number;//房主电话
-    char city[20];//所在城市
-    char urban[20];//所在区域
-    char community[20];//所在小区
+    char city[20];//所在市
+    char urban[20];//所在县/区
+    char community[20];//所在小区名字
     int floor;//楼层
     enum Toward { N, S, E, W, SE, NE, SW, SN}toward;//朝向
     int room;//室
@@ -37,6 +37,7 @@ struct House{
     float Area;//面积
     char fitment[10];//装修情况
     float rent, agency_fee, deposit;//费用，包括租金、中介费、押金
+    int time1, time2;//租房开始/结束日期
     struct User* user_agency;//中介
     struct User* user_custome;//租客
     int status;  // 0-可租 1-已租 2-申请中

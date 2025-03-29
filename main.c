@@ -1,25 +1,27 @@
 #include "data.h"
 #include "models.h"
 #include "utils.h"
+#include "auth.h"
+#include "crud.h"
 int main() {
-    //实现登录功能
-    bool login(int input_role, struct User* p1, struct User* head);
-
-    //实现注册功能
-    void register_user(int role, struct User* p1, struct User* p2, struct User* tail, struct User* head);
-
-    //添加用户
-    bool addUser(char* username, char* password, char* phoneNumber, int role, struct User* p1, struct User* p2, struct User* tail);
 
     //0：主菜单 1：身份选择菜单 2：管理员菜单 3：中介菜单 4：租客菜单
     int choice_0 = 1, choice_1, choice_2, choice_3, choice_4;
     //5:中介管理菜单
     int choice_5;
+    //6.信息查询菜单7.简单查询菜单8.范围查询菜单9.组合查询菜单
+    int choice_6, choice_7,choice_8, choice_9;
     //退出循环判断
     //0：身份选择 1:中介管理
-    int jug0 = 0, jug1 = 0;
+    int jug0 = 0, jug1 = 0,jug2 = 0;
 
     struct User* p1, * p2, * tail, * head;
+
+
+    struct House* house_head = NULL,*p3; // House 结构体的头指针
+    struct House* house_tail = NULL,*p4; // House 结构体的尾指针
+
+    
     p1 = (struct User*)malloc(sizeof(struct User));//申请空间
     if (p1 == NULL) { // 判断申请的空间是否为空（NULL）
         printf("内存空间分配失败\n");
@@ -32,23 +34,20 @@ int main() {
     tail->next = NULL;
     head->prev = NULL;
 
-    struct House* p11, * p21, * tail1, * head1;
-    p11 = (struct House*)malloc(sizeof(struct House));//申请空间
-    if (p11 == NULL) { // 判断申请的空间是否为空（NULL）
+    p3 = (struct House*)malloc(sizeof(struct House));//申请空间
+    if (p1 == NULL) { // 判断申请的空间是否为空（NULL）
         printf("内存空间分配失败\n");
         return -1;
     }
-
-    tail1 = p11; // 标记头尾
-    head1 = p11;
-    p21 = p11;
-    tail1->next = NULL;
-    head1->prev = NULL;
-
+    house_head = p3;
+    house_tail = p3;
+    p4 = p3;
+    house_head->next = NULL;
+    house_head->prev = NULL;
 
     //数据读取
     read_user_data(&tail);
-    read_house_data(&tail1);
+    read_house_data(&house_tail);
 
     //主界面
     while (choice_0) {
@@ -85,8 +84,8 @@ int main() {
                 break;
             case 1:
                 jug0 = 1;
-
-                if (!login(1, p1, head))
+                p1 = login(1, p1, head);
+                if (p1 == NULL)
                 {
                     break;
                 }
@@ -116,8 +115,121 @@ int main() {
                     case 0:
                         jug0 = 0;
                         break;
+                    case 3:
+                        jug1 = 1;
+                        while(jug1)
+                        { 
+                            printf("*********查询方式*********\n");
+                            printf("**                      **\n");
+                            printf("**0.     退    出       **\n");
+                            printf("**1.     简单查找       **\n");
+                            printf("**2.     范围查找       **\n");
+                            printf("**3.     组合查找       **\n");
+                            printf("**                      **\n");
+                            printf("**************************\n");
+                            printf("请选择查找方式:\n");
+                            scanf_s("%d", &choice_6);
+                            clear();
+                            switch (choice_6)
+                            {
+                            case 0:
+                                jug1 = 0;
+                                break;
+                            case 1:
+                                jug2 = 1;
+                                while (jug2)
+                                {
+                                    printf("*********查询方式*********\n");
+                                    printf("**                      **\n");
+                                    printf("** 0.    退    出        **\n");
+                                    printf("**1.     所在市          **\n");
+                                    printf("**2.     所在县/区       **\n");
+                                    printf("**3.     所在小区        **\n");
+                                    printf("**4.     朝    向       **\n");
+                                    printf("**5.     室    厅       **\n");
+                                    printf("**6.     装修情况        **\n");
+                                    printf("**7.     中    介       **\n");
+                                    printf("**                      **\n");
+                                    printf("**************************\n");
+                                    scanf_s("%d", &choice_7);
+                                    clear();
+                                    switch (choice_7)
+                                    {
+                                    case 0:
+                                        jug2 = 0;
+                                        break;
+                                    case 1:
+                                        simpleQueryHouse1(house_head);
+                                        break;
+                                    case 2:
+                                        simpleQueryHouse2(house_head);
+                                        break;
+                                    case 3:
+                                        simpleQueryHouse3(house_head);
+                                        break;
+                                    case 4:
+                                        simpleQueryHouse4(house_head);
+                                        break;
+                                    case 5:
+                                        simpleQueryHouse5(house_head);
+                                        break;
+                                    case 6:
+                                        simpleQueryHouse6(house_head);
+                                        break;
+                                    case 7:
+                                        simpleQueryHouse7(house_head);
+                                        break;
+                                    default:
+                                        printf("无效选项，请重新选择。\n");
+                                        clear();
+                                        break;
+
+                                    }
+                                }
+
+                            case 2:
+                                jug2 = 1;
+                                while (jug2)
+                                {
+                                    printf("*********查询方式*********\n");
+                                    printf("**                      **\n");
+                                    printf("**1.     租    金       **\n");
+                                    printf("**2.     楼    层       **\n");
+                                    printf("**3.     面    积       **\n");
+                                    printf("**                      **\n");
+                                    printf("**************************\n");
+                                    scanf_s("%d", &choice_8);
+                                    switch (choice_8) {
+                                    case 1:
+                                        rangeQueryRent(house_head);
+                                        break;
+                                    case 2:
+                                        rangeQueryFloor(house_head);
+                                        break;
+                                    case 3:
+                                        rangeQueryArea(house_head);
+                                        break;
+                                    default:
+                                        printf("无效选项，请重新选择。\n");
+                                        clear();
+                                        break;
+                                    }
+                                }
+                            
+
+
+                            }
+
+
+                        }
+
+
+                    case 6:
+                        updateMyPassword(p1);
+                        continue;
                     case 7:
                         register_user(1, p1, p2, tail, head);
+                        continue;
                     case 8:
                         jug1 = 1;
                         while (jug1)
@@ -141,13 +253,25 @@ int main() {
                                 break;
                             case 1:
                                 register_user(2, p1, p2, tail, head);
+                                continue;
+                            case 2:
+                                updatePassword(2, p1, head);
+                                continue;
+                            case 3:
+                                deleteUser(2, p1, head, tail);
+                                continue;
                             default:
+                                jug1 = 0;
                                 break;
                             }
                         }
                         break;
-
+                    case 9:
+                        deleteMyUser(p1, tail);
+                        jug0 = 0;
+                        break;
                     default:
+                        jug0 = 0;
                         break;
                     }
                 }
@@ -157,10 +281,12 @@ int main() {
             case 2:
                 jug0 = 1;
 
-                if (!login(2, p1, head))
+                p1 = login(2, p1, head);
+                if (p1 == NULL)
                 {
                     break;
                 }
+
                 while (jug0)
                 {
 
@@ -185,7 +311,15 @@ int main() {
                     case 0:
                         jug0 = 0;
                         break;
+                    case 6:
+                        updateMyPassword(p1);
+                        continue;
+                    case 7:
+                        deleteMyUser(p1, tail);
+                        jug0 = 0;
+                        break;
                     default:
+                        jug0 = 0;
                         break;
                     }
                 }
@@ -194,10 +328,12 @@ int main() {
             case 3:
                 jug0 = 1;
 
-                if (!login(3, p1, head))
+                p1 = login(3, p1, head);
+                if (p1 == NULL)
                 {
                     break;
                 }
+
                 while (jug0)
                 {
 
@@ -222,7 +358,15 @@ int main() {
                     case 0:
                         jug0 = 0;
                         break;
+                    case 6:
+                        updateMyPassword(p1);
+                        continue;
+                    case 7:
+                        deleteMyUser(p1, tail);
+                        jug0 = 0;
+                        break;
                     default:
+                        jug0 = 0;
                         break;
                     }
                 }
@@ -237,150 +381,4 @@ int main() {
     }
     write_user_data(head);
     return 0;
-}
-
-//实现登录功能
-bool login(int input_role, struct User* p1, struct User* head) {
-    char input_name[20] = { '\0' };
-    char input_password[20] = { '\0' };
-
-    p1 = head->next;
-    if (p1 == NULL)
-    {
-        printf("没有账号数据，请先注册！\n");
-        return false;
-    }
-
-    printf("请输入姓名：");
-    scanf("%s", input_name);
-
-    while (1)
-    {
-        if (p1->role == input_role)
-        {
-            if (!strcmp(input_name, p1->username))
-            {
-                printf("请输入密码:");
-                hideInput(input_password, 19);
-                if (!strcmp(input_password, p1->password))
-                {
-                    printf("登录成功，欢迎，用户%s\n", p1->username);
-                    printf("回车以继续\n");
-                    getchar();
-                    clear();
-                }
-                else
-                {
-                    printf("密码错误\n");
-                    printf("回车以继续\n");
-                    getchar();
-                    clear();
-                    return false;
-                }
-                return true;;
-            }
-        }
-
-        p1 = p1->next;
-        if (p1 == NULL)
-        {
-            printf("找不到对象\n");
-            printf("回车以继续\n");
-            getchar();
-            clear();
-            return false;;
-        }
-    }
-}
-
-//实现注册功能
-void register_user(int role, struct User* p1, struct User* p2, struct User* tail, struct User* head) {
-    char input_name[20] = { '\0' };
-    char input_password_1[20] = { '\0' };
-    char input_password_2[20] = { '\0' };
-    char input_phoneNumber[12] = { '\0' };
-
-    memset(input_name, 0, sizeof(input_name));
-    printf("请输入姓名：");
-    scanf("%s", input_name);
-
-    memset(input_phoneNumber, 0, sizeof(input_phoneNumber));
-    printf("请输入电话号码：(11位)");
-    scanf("%s", input_phoneNumber);
-
-
-    while (strlen(input_phoneNumber) != 11)
-    {
-        clear();
-        printf("无效的电话号码！\n");
-        printf("请输入正确的的电话号码:");
-        memset(input_phoneNumber, 0, sizeof(input_phoneNumber));
-        scanf("%s", input_phoneNumber);
-    }
-
-    p1 = head->next;
-    while (1)
-    {
-        if (p1 == NULL)
-        {
-            printf("请输入密码：");
-            hideInput(input_password_1, 19);
-            printf("请确认密码：");
-            hideInput(input_password_2, 19);
-            if (!strcmp(input_password_1, input_password_2))
-            {
-                if (!addUser(input_name, input_password_1, input_phoneNumber, role, p1, p2, tail))
-                {
-                    return;
-                }
-                printf("注册成功！\n");
-                getchar();
-                clear();
-                return;
-            }
-            else
-            {
-                printf("两次输入不一样的嘞");
-                printf("回车以继续");
-                getchar();
-                clear();
-                break;
-            }
-        }
-        if (!strcmp(input_name, p1->username) || !strcmp(input_phoneNumber, p1->phoneNumber))
-        {
-            printf("该用户已经存在\n");
-            printf("按回车以继续\n");
-            getchar();
-            clear();
-            break;
-        }
-        p1 = p1->next;
-    }
-}
-
-//添加用户
-bool addUser(char* username, char* password, char* phoneNumber, int role, struct User* p1, struct User* p2, struct User* tail)
-{
-    p1 = (struct User*)malloc(sizeof(struct User));//申请空间
-    if (p1 == NULL)//判断申请的空间是否为空（NULL）
-    {
-        printf("内存空间分配失败");
-        return false;
-
-    }
-
-    strcpy(p1->username, username);
-    strcpy(p1->password, password);
-    strcpy(p1->phoneNumber, phoneNumber);
-    p1->role = role;
-
-
-    //数据修改都在上面
-    tail->next = p1;
-    tail = p1;
-    tail->next = NULL;
-    p1->prev = p2;
-    p2 = p1;//延长链表
-    return true;
 }

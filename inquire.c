@@ -1,708 +1,260 @@
-//#include "inquire.h"
-//#include<stdio.h>
-//
-///*********************************************
-//字符串搜索，依然是返回其地址，还是需要free释放
-//需要输入中介、租客、预约三个链表的head
-//kind是搜索字符串来自那个链表，1是agency，2是customer
-//3是appointment,4是flat
-//注意：本函数不具备普遍性
-//数组第一个数是数组中的元素个数（不包括第一个）
-//*********************************************/
-//int* string_seach(char* input, struct Agency* ah, struct Customer* ch, struct Flat* fh, struct Appointment* aph, int kind)
-//{
-//	int max;
-//	int geshu = 0;//有效数据的个数
-//	int* position;
-//	char* temp2;
-//	int* arr;
-//	arr = NULL;
-//	temp2 = NULL;
-//	position = NULL;
-//	//构建临时链表
-//	struct MyStruct
-//	{
-//		char string[20];
-//		int time;//相关度
-//		struct MyStruct* next;
-//		int position;
-//	};
-//	struct MyStruct* p, * head, * tail;
-//	p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//	if (p == NULL)
-//	{
-//		logError(0);
-//		return NULL;
-//	}
-//	head = p;
-//	tail = p;
-//	p->next = NULL;
-//
-//	switch (kind)
-//	{
-//	case 1:
-//		max = countNumberAG(ah);
-//		struct Agency* ap;
-//		ap = ah;
-//		temp2 = (char*)malloc(51 * sizeof(char));//临时储存与输入字符串长度相同的数据
-//		if (temp2 == NULL)//动态分配的内存不是NULL
-//		{
-//			logError(0);
-//			return NULL;
-//		}
-//		memset(temp2, 0, 51 * sizeof(char));
-//		for (int a = 0; a != max; a++)
-//		{
-//			ap = ap->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(ap->Account) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = ap->Account[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, ap->Account);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		ap = ah;
-//		for (int a = 0; a != max; a++)
-//		{
-//			ap = ap->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(ap->phone_n) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = ap->phone_n[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, ap->phone_n);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		ap = ah;
-//		for (int a = 0; a != max; a++)
-//		{
-//			ap = ap->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(ap->Name) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = ap->Name[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, ap->Name);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		ap = ah;
-//		for (int a = 0; a != max; a++)
-//		{
-//			ap = ap->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(ap->Number) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = ap->Number[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, ap->Number);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		break;
-//	case 2:
-//		max = countNumberCU(ch);
-//		struct Customer* cp;
-//		cp = ch;
-//		temp2 = (char*)malloc(51 * sizeof(char));//临时储存与输入字符串长度相同的数据
-//		if (temp2 == NULL)//动态分配的内存不是NULL
-//		{
-//			logError(0);
-//			return NULL;
-//		}
-//		memset(temp2, 0, 51 * sizeof(char));
-//		for (int a = 0; a != max; a++)
-//		{
-//			cp = cp->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(cp->Account) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = cp->Account[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, cp->Account);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		cp = ch;
-//		for (int a = 0; a != max; a++)
-//		{
-//			cp = cp->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(cp->phone_n) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = cp->phone_n[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, cp->phone_n);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		cp = ch;
-//		for (int a = 0; a != max; a++)
-//		{
-//			cp = cp->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(cp->Name) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = cp->Name[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, cp->Name);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		break;
-//	case 3:
-//		max = countNumberAP(aph);
-//		struct Appointment* app;
-//		app = aph;
-//		temp2 = (char*)malloc(51 * sizeof(char));//临时储存与输入字符串长度相同的数据
-//		if (temp2 == NULL)//动态分配的内存不是NULL
-//		{
-//			logError(0);
-//			return NULL;
-//		}
-//		memset(temp2, 0, 51 * sizeof(char));
-//		for (int a = 0; a != max; a++)
-//		{
-//			app = app->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(app->Number) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = app->Number[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, app->Number);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		app = aph;
-//		for (int a = 0; a != max; a++)
-//		{
-//			app = app->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(app->custom->Account) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = app->custom->Account[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, app->custom->Account);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		app = aph;
-//		for (int a = 0; a != max; a++)
-//		{
-//			app = app->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(app->custom->Name) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = app->custom->Name[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, app->custom->Name);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		app = aph;
-//		for (int a = 0; a != max; a++)
-//		{
-//			app = app->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(app->custom->phone_n) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = app->custom->phone_n[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, app->custom->phone_n);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		app = aph;
-//		for (int a = 0; a != max; a++)
-//		{
-//			app = app->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(app->flat->number) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = app->flat->number[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, app->flat->number);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		break;
-//	case 4:
-//		max = countNumberFL(fh);
-//		struct Flat* fp;
-//		fp = fh;
-//		temp2 = (char*)malloc(51 * sizeof(char));//临时储存与输入字符串长度相同的数据
-//		if (temp2 == NULL)//动态分配的内存不是NULL
-//		{
-//			logError(0);
-//			return NULL;
-//		}
-//		memset(temp2, 0, 51 * sizeof(char));
-//		for (int a = 0; a != max; a++)
-//		{
-//			fp = fp->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(fp->number) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = fp->number[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, fp->number);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//		fp = fh;
-//		for (int a = 0; a != max; a++)
-//		{
-//			fp = fp->next;
-//			int jug = 0;//判断数据与输入项是否有关联，0无关联，1有关联
-//			int time = 0;//time越小关联性越高
-//			for (int i = 0; i <= (int)strlen(fp->city) - (int)strlen(input); i++)
-//			{
-//				int k = 0;
-//				for (int j = i; j < i + strlen(input); j++)
-//					*(temp2 + k++) = fp->city[j];
-//				if (strcmp(temp2, input) == 0)
-//				{
-//					jug = 1;
-//					break;
-//				}
-//				time++;//每检查一次，time+1
-//			}
-//			if (jug)
-//			{
-//				p = (struct MyStruct*)malloc(sizeof(struct MyStruct));
-//				if (p == NULL)
-//				{
-//					logError(0);
-//					return NULL;
-//				}
-//				strcpy(p->string, fp->city);
-//				p->time = time;
-//				p->position = a;
-//				tail->next = p;
-//				tail = p;
-//				tail->next = NULL;//延长链表
-//				geshu++;
-//				jug = 0;
-//			}
-//		}
-//	}
-//	position = (int*)malloc((geshu + 1) * sizeof(int));
-//	arr = (int*)malloc(geshu * sizeof(int));
-//	if (position == NULL)
-//	{
-//		logError(0);
-//		return NULL;
-//	}
-//	*position = geshu;
-//	int j = 0;
-//	for (int i = 0; geshu != 0; i++)
-//	{
-//		p = head->next;
-//
-//		while (1)
-//		{
-//			if (p == NULL)
-//			{
-//				logError(0);
-//				return NULL;
-//			}
-//			if (i == p->time)
-//			{
-//				*(arr + (j++)) = p->position;
-//				//此处还可实现其他功能
-//				geshu--;
-//			}
-//			if (p->next == NULL)
-//				break;
-//			p = p->next;
-//		}
-//	}
-//	struct MyStruct* p2;
-//	p = head;
-//	p2 = head->next;
-//	while (1)
-//	{
-//		free(p);
-//		p = p2;
-//		if (p == NULL && *position != 0)
-//		{
-//			logError(0);
-//			return NULL;
-//		}
-//		if (p == NULL && *position == 0)
-//			break;
-//		p2 = p->next;
-//		if (p2 == NULL)
-//		{
-//			free(p);
-//			break;
-//		}
-//	}
-//	removeDuplicates(arr, position);
-//	j = 1;
-//	for (int i = 0; i < *position; i++)
-//		*(position + i + 1) = *(arr + i);
-//	if (temp2 != NULL)
-//		free(temp2);
-//	free(arr);
-//	logInfo(6);
-//	return position;
-//}
-//
-//int toward_search(list_1 mylist_head, int i)
-//{
-//	int n = 0;
-//	struct Flat* p1;
-//	if (mylist_head->next == NULL)
-//	{
-//		logError(0);
-//		return -1;
-//	}
-//	p1 = mylist_head->next;
-//	while (p1 != NULL)
-//	{
-//		//这块需要加入打印
-//		if ((int)p1->toward == i)
-//		{
-//			n++;
-//			printf("%d:\t", n);
-//			printf("%s\t", p1->number);//这里需要更改成序号
-//			printf("%4.2f\t", p1->Area);
-//			printf("%d室%d厅\t", p1->shi, p1->ting);
-//			printf("朝向为");
-//			switch ((int)p1->toward)
-//			{
-//			case 1:
-//				printf("东\n");
-//				break;
-//			case 2:
-//				printf("南\n");
-//				break;
-//			case 3:
-//				printf("西\n");
-//				break;
-//			case 4:
-//				printf("北\n");
-//				break;
-//			case 5:
-//				printf("东南\n");
-//				break;
-//			case 6:
-//				printf("东北\n");
-//				break;
-//			case 7:
-//				printf("西南\n");
-//				break;
-//			case 8:
-//				printf("西北\n");
-//				break;
-//
-//			}
-//		}
-//		p1 = p1->next;
-//	}
-//	return n;
-//}
-//
+#include "inquire.h"
+#include "models.h"
+// inquire.c
+#include "utils.h"
+
+void simpleQueryHouse1(struct House* head) {
+    char city[20];
+    printf("请输入所在市：");
+    scanf("%s", city);
+
+    struct House* p = head->next;
+    int found = 0;
+
+    while (p != NULL) {
+        if (strcmp(p->city, city) == 0) {
+            printf("找到房源信息：\n");
+            printf("房间号：%d\n", p->id);
+            printf("所在市：%s\n", p->city);
+            found = 1;
+        }
+        p = p->next;
+    }
+
+    if (!found) {
+        printf("未找到符合条件的房源信息。\n");
+    }
+}
+
+// 2. 按所在县/区查询房源
+void simpleQueryHouse2(struct House* head) {
+    char urban[20];
+    printf("请输入所在县/区：");
+    scanf("%s", urban);
+
+    struct House* p = head->next;
+    int found = 0;
+
+    while (p != NULL) {
+        if (strcmp(p->urban, urban) == 0) {
+            printf("找到房源信息：\n");
+            printf("房间号：%d\n", p->id);
+            printf("所在县/区：%s\n", p->urban);
+            found = 1;
+        }
+        p = p->next;
+    }
+
+    if (!found) {
+        printf("未找到符合条件的房源信息。\n");
+    }
+}
+
+// 3. 按所在小区查询房源
+void simpleQueryHouse3(struct House* head) {
+    char community[20];
+    printf("请输入所在小区：");
+    scanf("%s", community);
+
+    struct House* p = head->next;
+    int found = 0;
+
+    while (p != NULL) {
+        if (strcmp(p->community, community) == 0) {
+            printf("找到房源信息：\n");
+            printf("房间号：%d\n", p->id);
+            printf("所在小区：%s\n", p->community);
+            found = 1;
+        }
+        p = p->next;
+    }
+
+    if (!found) {
+        printf("未找到符合条件的房源信息。\n");
+    }
+}
+
+// 4. 按朝向查询房源
+void simpleQueryHouse4(struct House* head) {
+    enum Toward toward;
+    printf("请输入朝向（0-北，1-南，2-东，3-西，4-东南，5-东北，6-西南，7-西北）：");
+    scanf("%d", (int*)&toward);
+
+    struct House* p = head->next;
+    int found = 0;
+
+    while (p != NULL) {
+        if (p->toward == toward) {
+            printf("找到房源信息：\n");
+            printf("房间号：%d\n", p->id);
+            printf("朝向：%d\n", p->toward);
+            found = 1;
+        }
+        p = p->next;
+    }
+
+    if (!found) {
+        printf("未找到符合条件的房源信息。\n");
+    }
+}
+
+// 5. 按室厅查询房源
+void simpleQueryHouse5(struct House* head) {
+    int room, hall;
+    printf("请输入室的数量：");
+    scanf("%d", &room);
+    printf("请输入厅的数量：");
+    scanf("%d", &hall);
+
+    struct House* p = head->next;
+    int found = 0;
+
+    while (p != NULL) {
+        if (p->room == room && p->hall == hall) {
+            printf("找到房源信息：\n");
+            printf("房间号：%d\n", p->id);
+            printf("室：%d\n", p->room);
+            printf("厅：%d\n", p->hall);
+            found = 1;
+        }
+        p = p->next;
+    }
+
+    if (!found) {
+        printf("未找到符合条件的房源信息。\n");
+    }
+}
+
+// 6. 按装修情况查询房源
+void simpleQueryHouse6(struct House* head) {
+    char fitment[10];
+    printf("请输入装修情况：");
+    scanf("%s", fitment);
+
+    struct House* p = head->next;
+    int found = 0;
+
+    while (p != NULL) {
+        if (strcmp(p->fitment, fitment) == 0) {
+            printf("找到房源信息：\n");
+            printf("房间号：%d\n", p->id);
+            printf("装修情况：%s\n", p->fitment);
+            found = 1;
+        }
+        p = p->next;
+    }
+
+    if (!found) {
+        printf("未找到符合条件的房源信息。\n");
+    }
+}
+
+// 7. 按中介查询房源
+void simpleQueryHouse7(struct House* head) {
+    char username[20];
+    printf("请输入中介用户名：");
+    scanf("%s", username);
+
+    struct House* p = head->next;
+    int found = 0;
+
+    while (p != NULL) {
+        if (p->user_agency != NULL && strcmp(p->user_agency->username, username) == 0) {
+            printf("找到房源信息：\n");
+            printf("房间号：%d\n", p->id);
+            printf("中介：%s\n", p->user_agency->username);
+            found = 1;
+        }
+        p = p->next;
+    }
+
+    if (!found) {
+        printf("未找到符合条件的房源信息。\n");
+    }
+}
+
+void rangeQueryRent(struct House* head) {
+    float min_rent, max_rent;
+    printf("请输入最小租金：");
+    scanf("%f", &min_rent);
+    printf("请输入最大租金：");
+    scanf("%f", &max_rent);
+
+    struct House* p = head->next;
+    int found = 0;
+
+    while (p != NULL) {
+        if (p->rent >= min_rent && p->rent <= max_rent) {
+            printf("找到房源信息：\n");
+            printf("房间号：%d\n", p->id);
+            printf("租金：%.2f\n", p->rent);
+            printf("所在城市：%s\n", p->city);
+            printf("所在区域：%s\n", p->urban);
+            printf("所在小区：%s\n", p->community);
+            found = 1;
+        }
+        p = p->next;
+    }
+
+    if (!found) {
+        printf("未找到符合条件的房源信息。\n");
+    }
+}
+
+// 范围查询楼层
+void rangeQueryFloor(struct House* head) {
+    int min_floor, max_floor;
+    printf("请输入最小楼层：");
+    scanf("%d", &min_floor);
+    printf("请输入最大楼层：");
+    scanf("%d", &max_floor);
+
+    struct House* p = head->next;
+    int found = 0;
+
+    while (p != NULL) {
+        if (p->floor >= min_floor && p->floor <= max_floor) {
+            printf("找到房源信息：\n");
+            printf("房间号：%d\n", p->id);
+            printf("楼层：%d\n", p->floor);
+            printf("所在城市：%s\n", p->city);
+            printf("所在区域：%s\n", p->urban);
+            printf("所在小区：%s\n", p->community);
+            found = 1;
+        }
+        p = p->next;
+    }
+
+    if (!found) {
+        printf("未找到符合条件的房源信息。\n");
+    }
+}
+
+// 范围查询面积
+void rangeQueryArea(struct House* head) {
+    float min_area, max_area;
+    printf("请输入最小面积：");
+    scanf("%f", &min_area);
+    printf("请输入最大面积：");
+    scanf("%f", &max_area);
+
+    struct House* p = head->next;
+    int found = 0;
+
+    while (p != NULL) {
+        if (p->Area >= min_area && p->Area <= max_area) {
+            printf("找到房源信息：\n");
+            printf("房间号：%d\n", p->id);
+            printf("面积：%.2f\n", p->Area);
+            printf("所在城市：%s\n", p->city);
+            printf("所在区域：%s\n", p->urban);
+            printf("所在小区：%s\n", p->community);
+            found = 1;
+        }
+        p = p->next;
+    }
+
+    if (!found) {
+        printf("未找到符合条件的房源信息。\n");
+    }
+}
