@@ -1,3 +1,4 @@
 #pragma once
 //查询系统
-int quire();//查询方式
+
+int* string_seach(char* input, struct Agency* ah, struct Customer* ch, struct Flat* fh, struct Appointment* aph, int kind);

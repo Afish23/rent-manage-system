@@ -4,7 +4,7 @@
 void admin_menu() {
     while (1) {
 		printf("*********功能菜单*********\n");
-		printf("**                      **\n");
+		printf("**                     **\n");
 		printf("**0.     退    出       **\n");
 		printf("**1.     信息管理       **\n");
 		printf("**2.     看房管理       **\n");
@@ -14,8 +14,8 @@ void admin_menu() {
 		printf("**6.     更改密码       **\n");
 		printf("**7.    生成邀请码      **\n");
 		printf("**8.     删除账户       **\n");
-		printf("**                      **\n");
-		printf("**************************\n");
+		printf("**                     **\n");
+		printf("*************************\n");
 		printf("请选择功能：");
     }
 }
