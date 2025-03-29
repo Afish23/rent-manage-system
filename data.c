@@ -4,7 +4,7 @@
 #include "utils.h"
 
 
-bool read_data(struct User** tailp)
+bool read_user_data(struct User** tailp)
 {
 	FILE* fp;
 	fp = fopen("user.bin", "rb");
@@ -35,7 +35,7 @@ bool read_data(struct User** tailp)
 	return true;
 }
 
-bool write_data(struct User* headp) {
+bool write_user_data(struct User* headp) {
 	FILE* fp;
 	fp = fopen("user.bin", "wb");
 
