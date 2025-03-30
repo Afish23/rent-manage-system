@@ -229,6 +229,7 @@ int main() {
                         continue;
                     case 7:
                         register_user(1, p1, p2, tail, head);
+                        write_user_data(head);
                         continue;
                     case 8:
                         jug1 = 1;
@@ -253,6 +254,7 @@ int main() {
                                 break;
                             case 1:
                                 register_user(2, p1, p2, tail, head);
+                                write_user_data(head);
                                 continue;
                             case 2:
                                 updatePassword(2, p1, head);
@@ -375,10 +377,11 @@ int main() {
             break;
         case 2:
             register_user(3, p1, p2, tail, head);
+            write_user_data(head);
         default:
             break;
         }
     }
-    write_user_data(head);
+
     return 0;
 }

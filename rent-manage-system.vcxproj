@@ -143,8 +143,8 @@
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="D:\ckeshe\rent-room-system\user.bin" />
     <None Include="house.bin" />
+    <None Include="user.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

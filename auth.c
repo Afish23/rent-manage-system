@@ -101,6 +101,7 @@ void register_user(int input_role, struct User* p1, struct User* p2, struct User
                     return;
                 }
                 printf("×¢²á³É¹¦£¡\n");
+                
                 getchar();
                 clear();
                 break;

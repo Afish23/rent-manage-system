@@ -58,7 +58,7 @@
     <None Include="house.bin">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="D:\ckeshe\rent-room-system\user.bin">
+    <None Include="user.bin">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
