@@ -4,5 +4,5 @@
 
 
 // 文件操作函数
-bool read_data(struct User** tailp);
-bool write_data(struct User* headp);
+bool read_user_data(struct User** tailp);
+bool write_user_data(struct User* headp);

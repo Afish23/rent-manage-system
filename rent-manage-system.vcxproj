@@ -127,11 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="auth.h" />
+    <ClInclude Include="crud.h" />
     <ClInclude Include="models.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="auth.c" />
+    <ClCompile Include="crud.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="data.c" />
     <ClCompile Include="utils.c" />
