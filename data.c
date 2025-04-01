@@ -55,3 +55,4 @@ bool write_user_data(struct User* headp) {
 	fclose(fp);
 	return true;
 }
+
