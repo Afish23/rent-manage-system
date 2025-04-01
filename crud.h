@@ -24,10 +24,10 @@ void updateMyNameOrPhoneNumber(struct User* current_p);
 void deleteMyUser(struct User* current_p, struct User* tail);
 
 //添加租房信息
-bool addRent(int id, int contractTime, int rentStartTime, int rentDuration, struct User* agent, struct User* tenant, struct House* house, struct Rent* p1, struct Rent* p2, struct Rent* tail)；
+bool addRent(int id, int contractTime, int rentStartTime, int rentDuration, struct User* agent, struct User* tenant, struct House* house, struct Rent* p1, struct Rent* p2, struct Rent* tail);
 
 //查找租房用户
-struct Rent* findRent(int input_id, int input_contractTime, int input_rentStartTime, int input_rentDuration, struct Rent* p1, struct Rent* head)；
+struct Rent* findRent(int input_id, int input_contractTime, int input_rentStartTime, int input_rentDuration, struct Rent* p1, struct Rent* head);
 
 //删除租房用户
-void deleteRent(int input_id, struct Rent* p1, struct Rent* head, struct Rent* tail)；
+void deleteRent(int input_id, struct Rent* p1, struct Rent* head, struct Rent* tail);
