@@ -1,4 +1,4 @@
-//���ݴ洢ʵ��
+//数据存储实现
 #include "data.h"
 #include "models.h"
 #include "utils.h"
@@ -11,7 +11,7 @@ bool read_user_data(struct User** tailp)
 
 	if (fp == NULL)
 	{
-		printf("�Ҳ���ָ���ļ�!\n");
+		printf("找不到指定文件!\n");
 		return false;
 	}
 	struct User* p;
@@ -41,7 +41,7 @@ bool write_user_data(struct User* headp) {
 
 	if (fp == NULL)
 	{
-		printf("�Ҳ���ָ���ļ�!\n");
+		printf("找不到指定文件!\n");
 		return false;
 	}
 	struct User* p;
@@ -55,4 +55,51 @@ bool write_user_data(struct User* headp) {
 	fclose(fp);
 	return true;
 }
+bool read_tenant_data(struct Rent** tailp)
+{
+	FILE* fp;
+	fp = fopen("tenant.bin", "rb");
 
+	if (fp == NULL)
+	{
+		printf("找不到指定文件!\n");
+		return false;
+	}
+	struct Rent* p;
+	p = NULL;
+	while (fread(p, sizeof(struct Rent), 1, fp) == 1) // 确保成功读取
+	{
+		p = (struct Rent*)malloc(sizeof(struct Rent));
+		assert(p);
+
+		// 将新节点添加到链表
+		(*tailp)->next = p;
+		p->prev = (*tailp);
+		(*tailp) = p;
+		p->next = NULL;
+	}
+
+	(*tailp)->next = NULL;  // 确保链表尾部的 next 指针为 NULL
+	fclose(fp);
+	return true;
+}
+bool write_tenant_data(struct Rent* headp) {
+	FILE* fp;
+	fp = fopen("tenant.bin", "wb");
+
+	if (fp == NULL)
+	{
+		printf("找不到指定文件!\n");
+		return false;
+	}
+	struct Rent* p;
+	p = headp->next;
+	while (p != NULL)
+	{
+		assert(p);
+		fwrite(p, sizeof(struct Rent), 1, fp);
+		p = p->next;
+	}
+	fclose(fp);
+	return true;
+}
