@@ -164,8 +164,48 @@ void updateMyPassword(struct User* current_p)
             clear();
             continue;
         }
+        return;
     }
-    return;
+}
+
+//修改自己姓名或手机号
+void updateMyNameOrPhoneNumber(struct User* current_p)
+{
+    int choice;
+    char input_name[20] = { '\0' };
+    char input_phoneNumber[12] = { '\0' };
+    while (1)
+    {
+        printf("请输入要修改的信息\n0退出\t1姓名\t 2手机号：\n");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 0:
+            getchar();
+            clear();
+            break;
+        case 1:
+            memset(input_name, 0, sizeof(input_name));
+            printf("请输入修改后的姓名：");
+            scanf("%s", input_name);
+            strcpy(current_p->username, input_name);
+            printf("修改姓名成功！\n");
+            getchar();
+            clear();
+            continue;
+        case 2:
+            memset(input_phoneNumber, 0, sizeof(input_phoneNumber));
+            printf("请输入修改后的手机号：");
+            scanf("%s", input_phoneNumber);
+            strcpy(current_p->phoneNumber, input_phoneNumber);
+            printf("修改手机号成功！\n");
+            getchar();
+            clear();
+            continue;
+        }
+        return;
+    }
+
 }
 
 //删除自己

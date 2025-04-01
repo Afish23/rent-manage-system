@@ -212,7 +212,7 @@ int main() {
                     printf("*********功能菜单*********\n");
                     printf("**                      **\n");
                     printf("**0.     退    出       **\n");
-                    printf("**1.     个人信息       **\n");
+                    printf("**1.     修改信息       **\n");
                     printf("**2.     看房预约       **\n");
                     printf("**3.     信息查询       **\n");
                     printf("**4.     信息排序       **\n");
@@ -230,6 +230,9 @@ int main() {
                     case 0:
                         jug0 = 0;
                         break;
+                    case 1:
+                        updateMyNameOrPhoneNumber(p1);
+                        continue;
                     case 6:
                         updateMyPassword(p1);
                         continue;

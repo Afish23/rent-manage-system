@@ -24,7 +24,7 @@ struct User
 struct House {
     struct House* prev;// 前一个房源
     struct House* next; // 后一个房源
-    int id;//房间号
+    int id;//房源ID
     char houseowner[10];//房主名字
     int number;//房主电话
     char city[20];//所在市
@@ -38,8 +38,10 @@ struct House {
     char fitment[10];//装修情况
     float rent, agency_fee, deposit;//费用，包括租金、中介费、押金
     int time1, time2;//租房开始/结束日期
-    struct User* user_agency;//中介
-    struct User* user_custome;//租客
+    struct User* agent;//中介
+    struct User* tenant;//租客
+    char agentname[20];//中介姓名
+    char tenantname[20];//租客姓名
     int status;  // 0-可租 1-已租 2-申请中
 };
 
@@ -53,8 +55,11 @@ struct Appointment//预约信息
     struct User* agent;//中介
     struct User* tenant;//租客
     struct House* house;//房源
+    char agentname[20];//中介姓名
+    char tenantname[20];//租客姓名
+    int id;//房源ID
     char feedback[20];//租客反馈
-    int statment;//0已完成，1待处理
+    int statement;//0已完成，1待处理
 };
 
 struct Rent//租房信息
@@ -68,5 +73,8 @@ struct Rent//租房信息
     struct User* agent;//中介
     struct User* tenant;//租客
     struct House* house;//房源
-    int statment;//0已完成，1正在租
+    char agentname[20];//中介姓名
+    char tenantname[20];//租客姓名
+    int id;//房源ID
+    int statement;//0已完成，1正在租
 };
