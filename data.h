@@ -7,6 +7,4 @@
 bool read_user_data(struct User** tailp);
 bool write_user_data(struct User* headp);
 bool read_house_data(struct House** tailp);
-bool write_house_data(struct House** tailp);
-bool read_appointment_data(struct Appointment** tailp);
-bool write_appointment_data(struct Appointment** tailp);
+bool write_house_data(struct House* tailp);

@@ -7,8 +7,9 @@ int main() {
 
     //0：主菜单 1：身份选择菜单 2：管理员菜单 3：中介菜单 4：租客菜单
     int choice_0 = 1, choice_1, choice_2, choice_3, choice_4;
-    //5:中介管理菜单
-    int choice_5;
+    //5:中介管理菜单10：看房管理菜单
+    int choice_5,choice_10;
+    int update_id ,delete_id;//修改房源id
     //6.信息查询菜单7.简单查询菜单8.范围查询菜单9.组合查询菜单
     int choice_6, choice_7,choice_8, choice_9;
     //退出循环判断
@@ -16,33 +17,32 @@ int main() {
     int jug0 = 0, jug1 = 0,jug2 = 0;
 
     struct User* p1, * p2, * tail, * head;
-
-
-    struct House* house_head = NULL,*p3; // House 结构体的头指针
-    struct House* house_tail = NULL,*p4; // House 结构体的尾指针
-
-    
     p1 = (struct User*)malloc(sizeof(struct User));//申请空间
     if (p1 == NULL) { // 判断申请的空间是否为空（NULL）
         printf("内存空间分配失败\n");
         return -1;
     }
-
     tail = p1; // 标记头尾
     head = p1;
     p2 = p1;
     tail->next = NULL;
     head->prev = NULL;
 
-    p3 = (struct House*)malloc(sizeof(struct House));//申请空间
-    if (p1 == NULL) { // 判断申请的空间是否为空（NULL）
+   
+
+
+
+    struct House* house_p1, * house_p2, * house_tail, * house_head;//构建链表
+    house_p1 = (struct House*)malloc(sizeof(struct House));//申请空间
+    if (house_p1 == NULL)//判断申请的空间是否为空（NULL）
+    {
         printf("内存空间分配失败\n");
         return -1;
     }
-    house_head = p3;
-    house_tail = p3;
-    p4 = p3;
-    house_head->next = NULL;
+    house_tail = house_p1;//标记头尾
+    house_head = house_p1;
+    house_p2 = house_p1;
+    house_tail->next = NULL;
     house_head->prev = NULL;
 
     //数据读取
@@ -115,6 +115,66 @@ int main() {
                     case 0:
                         jug0 = 0;
                         break;
+                    case 2:
+                        jug1 = 1;
+                        while (jug1)
+                        {
+                            printf("******看房管理******\n");
+                            printf("**                **\n");
+                            printf("**0.  退    出    **\n");
+                            printf("**1.  添    加    **\n");
+                            printf("**2.  修    改    **\n");                              
+                            printf("**3.  删    除    **\n");
+                            printf("**                **\n");
+                            printf("********************\n");
+                            printf("请选择：");
+                            scanf_s("%d", &choice_10);
+                            clear();
+                            switch (choice_10)
+                            {
+                            case 0:
+                                jug1 = 0;
+                                break;
+                            case 1:
+                                addHouse(house_head, house_tail, head, tail);
+                                write_house_data(house_head);
+                                break;
+                            case 2: 
+                                printf("请输入要修改的房源ID：");
+                                scanf_s("%d", &update_id);
+
+                                
+                                if (updateHouse(update_id, house_head)) {
+                                    printf("房源修改成功！\n");
+                                }
+                                else {
+                                    printf("修改失败，未找到房源。\n");
+                                }
+                                break;
+                            
+                            case 3: 
+
+                                printf("请输入要删除的房源ID：");
+                                scanf_s("%d", &delete_id);
+
+                                if (deleteHouse(delete_id, house_head)) {
+                                    printf("房源删除成功！\n");
+                                }
+                                else {
+                                    printf("删除失败，未找到房源。\n");
+                                }
+                                break;
+                            
+                            
+                            default:
+                                printf("无效选项，请重新选择。\n");
+                                clear();
+
+                            }
+
+                        }
+                        break;
+
                     case 3:
                         jug1 = 1;
                         while(jug1)
@@ -186,20 +246,25 @@ int main() {
 
                                     }
                                 }
-
+                                break;
                             case 2:
                                 jug2 = 1;
                                 while (jug2)
                                 {
                                     printf("*********查询方式*********\n");
                                     printf("**                      **\n");
+                                    printf("**0.     退    出       **\n");
                                     printf("**1.     租    金       **\n");
                                     printf("**2.     楼    层       **\n");
                                     printf("**3.     面    积       **\n");
                                     printf("**                      **\n");
                                     printf("**************************\n");
                                     scanf_s("%d", &choice_8);
+                                    clear();
                                     switch (choice_8) {
+                                    case 0:
+                                        jug2 = 0;
+                                        break;
                                     case 1:
                                         rangeQueryRent(house_head);
                                         break;
@@ -216,14 +281,14 @@ int main() {
                                     }
                                 }
                             
-
+                                break;
 
                             }
 
-
+                            
                         }
 
-
+                        break;
                     case 6:
                         updateMyPassword(p1);
                         continue;

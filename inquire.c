@@ -24,6 +24,7 @@ void simpleQueryHouse1(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
+    clear();
 }
 
 // 2. 按所在县/区查询房源
@@ -48,6 +49,7 @@ void simpleQueryHouse2(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
+    clear();
 }
 
 // 3. 按所在小区查询房源
@@ -72,6 +74,7 @@ void simpleQueryHouse3(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
+    clear();
 }
 
 // 4. 按朝向查询房源
@@ -96,6 +99,7 @@ void simpleQueryHouse4(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
+    clear();
 }
 
 // 5. 按室厅查询房源
@@ -123,6 +127,7 @@ void simpleQueryHouse5(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
+    clear();
 }
 
 // 6. 按装修情况查询房源
@@ -147,6 +152,7 @@ void simpleQueryHouse6(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
+    clear();
 }
 
 // 7. 按中介查询房源
@@ -171,6 +177,7 @@ void simpleQueryHouse7(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
+    clear();
 }
 
 void rangeQueryRent(struct House* head) {
@@ -199,6 +206,7 @@ void rangeQueryRent(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
+    clear();
 }
 
 // 范围查询楼层
@@ -228,6 +236,7 @@ void rangeQueryFloor(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
+    clear();
 }
 
 // 范围查询面积
@@ -257,4 +266,5 @@ void rangeQueryArea(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
+    clear();
 }
