@@ -1,8 +1,11 @@
-//Êı¾İ²Ù×÷ÉùÃ÷
+//æ•°æ®æ“ä½œå£°æ˜
 #pragma once
 #include "models.h"
 
 
-// ÎÄ¼ş²Ù×÷º¯Êı
+// æ–‡ä»¶æ“ä½œå‡½æ•°
 bool read_user_data(struct User** tailp);
 bool write_user_data(struct User* headp);
+
+bool read_tenant_data(struct Rent** tailp)ï¼›
+bool write_tenant_data(struct Rent* headp)ï¼›
