@@ -1,24 +1,33 @@
-//ÔöÉ¾²é¸Ä
+//å¢åˆ æŸ¥æ”¹
 #pragma once
 #include "models.h"
 
-//Ìí¼ÓÓÃ»§
+//æ·»åŠ ç”¨æˆ·
 bool addUser(char* username, char* password, char* phoneNumber, int role, struct User* p1, struct User* p2, struct User* tail);
 
-//²éÕÒÓÃ»§
+//æŸ¥æ‰¾ç”¨æˆ·
 struct User* findUser(int input_role, struct User* p1, struct User* head);
 
-//²éÕÒĞŞ¸ÄÓÃ»§ÃÜÂë
+//æŸ¥æ‰¾ä¿®æ”¹ç”¨æˆ·å¯†ç 
 void updatePassword(int input_role, struct User* p1, struct User* head);
 
-//²éÕÒÉ¾³ıÓÃ»§
+//æŸ¥æ‰¾åˆ é™¤ç”¨æˆ·
 void deleteUser(int input_role, struct User* p1, struct User* head, struct User* tail);
 
-//ĞŞ¸Ä×Ô¼ºÃÜÂë
+//ä¿®æ”¹è‡ªå·±å¯†ç 
 void updateMyPassword(struct User* current_p);
 
-//ĞŞ¸Ä×Ô¼ºĞÕÃû»òÊÖ»úºÅ
+//ä¿®æ”¹è‡ªå·±å§“åæˆ–æ‰‹æœºå·
 void updateMyNameOrPhoneNumber(struct User* current_p);
 
-//É¾³ı×Ô¼º
+//åˆ é™¤è‡ªå·±
 void deleteMyUser(struct User* current_p, struct User* tail);
+
+//æ·»åŠ ç§Ÿæˆ¿ä¿¡æ¯
+bool addRent(int id, int contractTime, int rentStartTime, int rentDuration, struct User* agent, struct User* tenant, struct House* house, struct Rent* p1, struct Rent* p2, struct Rent* tail)ï¼›
+
+//æŸ¥æ‰¾ç§Ÿæˆ¿ç”¨æˆ·
+struct Rent* findRent(int input_id, int input_contractTime, int input_rentStartTime, int input_rentDuration, struct Rent* p1, struct Rent* head)ï¼›
+
+//åˆ é™¤ç§Ÿæˆ¿ç”¨æˆ·
+void deleteRent(int input_id, struct Rent* p1, struct Rent* head, struct Rent* tail)ï¼›
