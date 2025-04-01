@@ -66,20 +66,22 @@ bool read_tenant_data(struct Rent** tailp)
 		return false;
 	}
 	struct Rent* p;
-	p = NULL;
-	while (fread(p, sizeof(struct Rent), 1, fp) == 1) // 确保成功读取
+	p = NULL; 
+	while (!feof(fp))
 	{
 		p = (struct Rent*)malloc(sizeof(struct Rent));
 		assert(p);
-
-		// 将新节点添加到链表
+		fread(p, sizeof(struct Rent), 1, fp);
 		(*tailp)->next = p;
 		p->prev = (*tailp);
 		(*tailp) = p;
 		p->next = NULL;
 	}
-
-	(*tailp)->next = NULL;  // 确保链表尾部的 next 指针为 NULL
+	assert(p);
+	*tailp = p->prev;
+	p->prev->next = NULL;
+	free(p);
+	p = NULL;
 	fclose(fp);
 	return true;
 }

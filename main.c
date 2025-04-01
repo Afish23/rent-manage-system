@@ -27,18 +27,18 @@ int main() {
     head->prev = NULL;
 
     //为读取租房信息做准备
-    struct Rent* p1, * p2, * tail, * head;
-    p1 = (struct Rent*)malloc(sizeof(struct Rent));//申请空间
-    if (p1 == NULL) { // 判断申请的空间是否为空（NULL）
+    struct Rent* q1, * q2, * tail1, * head1;
+    q1 = (struct Rent*)malloc(sizeof(struct Rent));//申请空间
+    if (q1 == NULL) { // 判断申请的空间是否为空（NULL）
         printf("内存空间分配失败\n");
         return -1;
     }
 
-    tail = p1; // 标记头尾
-    head = p1;
-    p2 = p1;
-    tail->next = NULL;
-    head->prev = NULL;
+    tail1 = q1; // 标记头尾
+    head1 = q1;
+    q2 = q1;
+    tail1->next = NULL;
+    head1->prev = NULL;
 
     read_tenant_data(&tail);
 

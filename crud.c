@@ -267,10 +267,11 @@ bool addRent(int id, int contractTime, int rentStartTime, int rentDuration, stru
 }
 
 //查找租房用户
-struct Rent* findRent(int input_id, int input_contractTime, int input_rentStartTime, int input_rentDuration, struct Rent* p1, struct Rent* head)
+/*
+struct Rent* findRent(int input_role, struct Rent* p1, struct Rent* head)
 {
     p1 = head->next; // 从链表的第一个租房信息开始
-
+    int input_id, input_contractTime, input_rentStartTime, input_rentDuration;
     // 提示用户输入查询条件
     printf("请输入要查找租房信息的租房编号：");
     scanf("%d", &input_id);
@@ -286,15 +287,18 @@ struct Rent* findRent(int input_id, int input_contractTime, int input_rentStartT
 
     // 遍历链表查找匹配的租房信息
     while (p1 != NULL)
-    {
-        // 判断租房ID、合同签订日期、出租开始日期和预计出租时长是否都匹配
-        if (p1->id == input_id && p1->contractTime == input_contractTime &&
-            p1->rentStartTime == input_rentStartTime && p1->rentDuration == input_rentDuration)
+    {   
+        if (p1->role == input_role)
         {
-            printf("查找租房信息成功！\n");
-            getchar(); // 消耗掉多余的换行符
-            clear();  // 假设清屏函数
-            return p1; // 返回找到的租房信息
+            // 判断租房ID、合同签订日期、出租开始日期和预计出租时长是否都匹配
+            if (p1->id == input_id && p1->contractTime == input_contractTime &&
+                p1->rentStartTime == input_rentStartTime && p1->rentDuration == input_rentDuration)
+            {
+                printf("查找租房信息成功！\n");
+                getchar(); // 消耗掉多余的换行符
+                clear();  // 假设清屏函数
+                return p1; // 返回找到的租房信息
+            }
         }
 
         p1 = p1->next; // 移动到下一个租房信息节点
@@ -349,4 +353,4 @@ void deleteRent(int input_id, struct Rent* p1, struct Rent* head, struct Rent* t
     }
 
     return;
-}
+}*/

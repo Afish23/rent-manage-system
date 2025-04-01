@@ -54,7 +54,7 @@ struct Appointment//预约信息
     struct User* tenant;//租客
     struct House* house;//房源
     char feedback[20];//租客反馈
-    int statment;//0已完成，1待处理
+    int statement;//0已完成，1待处理
 };
 
 struct Rent//租房信息
@@ -68,5 +68,5 @@ struct Rent//租房信息
     struct User* agent;//中介
     struct User* tenant;//租客
     struct House* house;//房源
-    int statment;//0已完成，1正在租
+    int statement;//0已完成，1正在租
 };
