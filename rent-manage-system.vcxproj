@@ -130,18 +130,24 @@
     <ClInclude Include="auth.h" />
     <ClInclude Include="crud.h" />
     <ClInclude Include="data.h" />
+    <ClInclude Include="inquire.h" />
     <ClInclude Include="models.h" />
+    <ClInclude Include="sort.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="auth.c" />
     <ClCompile Include="crud.c" />
     <ClCompile Include="data.c" />
+    <ClCompile Include="inquire.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="sort.c" />
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="tenant.bin" />
+    <None Include="appointment.bin" />
+    <None Include="house.bin" />
+    <None Include="rent.bin" />
     <None Include="user.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
