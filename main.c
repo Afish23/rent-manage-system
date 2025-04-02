@@ -333,9 +333,10 @@ int main() {
                             printf("******租房管理******\n");
                             printf("**                **\n");
                             printf("**0.  退    出    **\n");
-                            printf("**1.  查    看    **\n");
-                            printf("**2.  修    改    **\n");
-                            printf("**3.  删    除    **\n");
+                            printf("**1.  新    增    **\n");
+                            printf("**2.  查    看    **\n");
+                            printf("**3.  修    改    **\n");
+                            printf("**4.  删    除    **\n");
                             printf("**                **\n");
                             printf("********************\n");
                             printf("请选择：");
