@@ -57,7 +57,7 @@ struct Appointment//预约信息
     struct House* house;//房源
     char agentname[20];//中介姓名
     char tenantname[20];//租客姓名
-    int id;//房源ID
+    int house_id;//房源ID
     char feedback[20];//租客反馈
     int statement;//0已完成，1待处理
 };
@@ -75,6 +75,6 @@ struct Rent//租房信息
     struct House* house;//房源
     char agentname[20];//中介姓名
     char tenantname[20];//租客姓名
-    int id;//房源ID
+    int house_id;//房源ID
     int statement;//0已完成，1正在租
 };
