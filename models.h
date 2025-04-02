@@ -25,8 +25,9 @@ struct House {
     struct House* prev;// 前一个房源
     struct House* next; // 后一个房源
     int id;//房源ID
+    int house_id;//房间号
     char houseowner[10];//房主名字
-    int number;//房主电话
+    char number[12];//房主电话
     char city[20];//所在市
     char urban[20];//所在县/区
     char community[20];//所在小区名字

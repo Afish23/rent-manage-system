@@ -52,5 +52,8 @@
     <None Include="user.bin">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="house.bin">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 //增删查改
 #include "crud.h"
 #include "utils.h"
-#include "data.h"
 
 //添加用户
 bool addUser(char* username, char* password, char* phoneNumber, int input_role, struct User* p1, struct User* p2, struct User* tail)
@@ -26,6 +25,57 @@ bool addUser(char* username, char* password, char* phoneNumber, int input_role, 
     p1->prev = p2;
     p2 = p1;//延长链表
     return true;
+}
+
+// 按照身份顺序输出所有用户信息
+void printUsersInOrder(struct User* head) {
+    if (head == NULL) {
+        printf("链表为空，没有用户信息。\n");
+        return;
+    }
+
+    struct User* current = head;
+
+    // 输出管理员信息
+    printf("===== 管理员 =====\n");
+    current = head;
+    while (current != NULL) {
+        if (current->role == 1) {
+            printf("用户名: %s\n", current->username);
+            printf("密码: %s\n", current->password);
+            printf("电话号码: %s\n", current->phoneNumber);
+            printf("-----------------------------\n");
+        }
+        current = current->next;
+    }
+
+    // 输出中介信息
+    printf("===== 中介 =====\n");
+    current = head;
+    while (current != NULL) {
+        if (current->role == 2) {
+            printf("用户名: %s\n", current->username);
+            printf("密码: %s\n", current->password);
+            printf("电话号码: %s\n", current->phoneNumber);
+            printf("-----------------------------\n");
+        }
+        current = current->next;
+    }
+
+    // 输出租客信息
+    printf("===== 租客 =====\n");
+    current = head;
+    while (current != NULL) {
+        if (current->role == 3) {
+            printf("用户名: %s\n", current->username);
+            printf("密码: %s\n", current->password);
+            printf("电话号码: %s\n", current->phoneNumber);
+            printf("-----------------------------\n");
+        }
+        current = current->next;
+    }
+    getchar();
+    clear();
 }
 
 //查找用户
@@ -237,3 +287,100 @@ void deleteMyUser(struct User* current_p, struct User* tail)
     }
     return;
 }
+
+//添加房源
+int addHouse(struct House** head, struct House** tail, struct User* user_agency, struct User* user_custome) {
+    struct House* newHouse = (struct House*)malloc(sizeof(struct House));
+    if (newHouse == NULL) {
+        printf("内存分配失败\n");
+        return -1;
+    }
+
+    // 获取房源的各项信息
+    printf("请输入房源ID: ");
+    scanf("%d", &newHouse->id);
+
+    printf("请输入房间号: ");
+    scanf("%d", &newHouse->house_id);
+
+    printf("请输入房主名字: ");
+    scanf("%s", newHouse->houseowner);
+
+    printf("请输入房主电话: ");
+    scanf("%s", newHouse->number);
+
+    printf("请输入所在市: ");
+    scanf("%s", newHouse->city);
+
+    printf("请输入所在县/区: ");
+    scanf("%s", newHouse->urban);
+
+    printf("请输入所在小区名字: ");
+    scanf("%s", newHouse->community);
+
+    printf("请输入楼层: ");
+    scanf("%d", &newHouse->floor);
+
+    printf("请输入朝向（0: N, 1: S, 2: E, 3: W, 4: SE, 5: NE, 6: SW, 7: SN）: ");
+    int toward_input;
+    scanf("%d", &toward_input);
+    newHouse->toward = (enum Toward)toward_input;
+
+    printf("请输入室数: ");
+    scanf("%d", &newHouse->room);
+
+    printf("请输入厅数: ");
+    scanf("%d", &newHouse->hall);
+
+    printf("请输入房屋面积: ");
+    scanf("%f", &newHouse->Area);
+
+    printf("请输入装修情况: ");
+    scanf("%s", newHouse->fitment);
+
+    printf("请输入租金: ");
+    scanf("%f", &newHouse->rent);
+
+    printf("请输入中介费: ");
+    scanf("%f", &newHouse->agency_fee);
+
+    printf("请输入押金: ");
+    scanf("%f", &newHouse->deposit);
+
+    printf("请输入租房开始日期 (格式：YYYYMMDD): ");
+    scanf("%d", &newHouse->time1);
+
+    printf("请输入租房结束日期 (格式：YYYYMMDD): ");
+    scanf("%d", &newHouse->time2);
+
+    // 设置中介和租客信息
+    /*newHouse->user_agency = user_agency;
+    newHouse->user_custome = user_custome;
+
+    printf("请输入中介姓名: ");
+    scanf("%s", newhouse->agentname);
+
+    printf("请输入租客姓名: ");
+    scanf("%s", newhouse->tenantname);*/
+
+    printf("请输入房源状态（0: 可租, 1: 已租, 2: 申请中）: ");
+    scanf("%d", &newHouse->status);
+
+    // 设置链表的前后指针
+    newHouse->prev = *tail;
+    if (*tail != NULL)
+        (*tail)->next = newHouse; // 将尾节点指向新房源
+
+    newHouse->next = NULL; // 新房源的后继指针为空
+
+    // 更新tail指针
+    *tail = newHouse;
+    if (*head == NULL) {
+        *head = newHouse; // 如果链表为空，设置新房源为头节点
+    }
+    printf("添加成功!");
+    getchar();
+    clear();
+    return 0; // 房源添加成功
+}
+

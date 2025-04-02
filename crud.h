@@ -5,6 +5,9 @@
 //添加用户
 bool addUser(char* username, char* password, char* phoneNumber, int role, struct User* p1, struct User* p2, struct User* tail);
 
+// 按照身份顺序输出所有用户信息
+void printUsersInOrder(struct User* head);
+
 //查找用户
 struct User* findUser(int input_role, struct User* p1, struct User* head);
 
@@ -22,3 +25,6 @@ void updateMyNameOrPhoneNumber(struct User* current_p);
 
 //删除自己
 void deleteMyUser(struct User* current_p, struct User* tail);
+
+//添加房源
+int addHouse(struct House** head, struct House** tail, struct User* user_agency, struct User* user_custome);

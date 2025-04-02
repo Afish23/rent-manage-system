@@ -4,18 +4,20 @@
 #include "auth.h"
 #include "crud.h"
 int main() {
-    
-        //0：主菜单 1：身份选择菜单 2：管理员菜单 3：中介菜单 4：租客菜单
+
+    //0：主菜单 1：身份选择菜单 2：管理员菜单 3：中介菜单 4：租客菜单
     int choice_0 = 1, choice_1, choice_2, choice_3, choice_4,
         //5:管理员-中介管理菜单 6:管理员-房源管理菜单 7:信息查询菜单 8:信息排序菜单
         choice_5, choice_6, choice_7, choice_8,
         //9:信息统计菜单 10:看房管理菜单 11:租房管理菜单 12:看房预约菜单
-        choice_9, choice_10, choice_11, choice_12;
-        //退出循环判断
-        //0：身份选择 1:中介管理 2:房源管理 3:信息查询 4:信息排序 
-    int jug0 = 0, jug1 = 0, jug2 = 0, jug3 = 0, jug4 = 0, 
-        //5:信息统计 6:看房管理 7:租房管理 8:看房预约
-        jug5 = 0, jug6 = 0, jug7 = 0, jug8 = 0;
+        choice_9, choice_10, choice_11, choice_12,
+        //13:查询方式菜单
+        choice_13;
+    //退出循环判断
+    //0：身份选择 1:中介管理 2:房源管理 3:信息查询 4:信息排序 
+    int jug0 = 0, jug1 = 0, jug2 = 0, jug3 = 0, jug4 = 0,
+        //5:信息统计 6:看房管理 7:租房管理 8:看房预约 9:查询方式
+        jug5 = 0, jug6 = 0, jug7 = 0, jug8 = 0, jug9 = 0;
 
     struct User* p1, * p2, * tail, * head;
     p1 = (struct User*)malloc(sizeof(struct User));//申请空间
@@ -30,9 +32,23 @@ int main() {
     tail->next = NULL;
     head->prev = NULL;
 
+    struct House* house_p1, * house_p2, * house_tail, * house_head;//构建链表
+    house_p1 = (struct House*)malloc(sizeof(struct House));//申请空间
+    if (house_p1 == NULL)//判断申请的空间是否为空（NULL）
+    {
+        printf("内存空间分配失败\n");
+        return -1;
+    }
+    house_tail = house_p1;//标记头尾
+    house_head = house_p1;
+    house_p2 = house_p1;
+    house_tail->next = NULL;
+    house_head->prev = NULL;
+
 
     //数据读取
     read_user_data(&tail);
+    read_house_data(&house_tail);
 
     //主界面
     while (choice_0) {
@@ -118,6 +134,9 @@ int main() {
                             clear();
                             switch (choice_6)
                             {
+                            case 1:
+                                addHouse(house_head, house_tail, head, tail);
+                                break;
                             case 0:
                                 jug2 = 0;
                                 break;
@@ -151,6 +170,11 @@ int main() {
                             case 0:
                                 jug3 = 0;
                                 break;
+                            case 1:
+                                printUsersInOrder(head);
+                                continue;
+                            case 2:
+                                
                             default:
                                 jug3 = 0;
                                 break;
@@ -216,6 +240,9 @@ int main() {
                         continue;
                     case 7:
                         register_user(1, p1, p2, tail, head);
+                        tail = tail->next;
+                        p2 = tail;
+                        p1 = tail;
                         continue;
                     case 8:
                         jug1 = 1;
@@ -240,6 +267,9 @@ int main() {
                                 break;
                             case 1:
                                 register_user(2, p1, p2, tail, head);
+                                tail = tail->next;
+                                p2 = tail;
+                                p1 = tail;
                                 continue;
                             case 2:
                                 updatePassword(2, p1, head);
@@ -263,8 +293,8 @@ int main() {
                     }
                 }
                 break;
-                    
-                
+
+
             case 2:
                 jug0 = 1;
 
@@ -447,7 +477,7 @@ int main() {
                     }
                 }
                 break;
-                 
+
             case 3:
                 jug0 = 1;
 
@@ -456,7 +486,7 @@ int main() {
                 {
                     break;
                 }
-               
+
                 while (jug0)
                 {
 
@@ -610,11 +640,15 @@ int main() {
             break;
         case 2:
             register_user(3, p1, p2, tail, head);
+            tail = tail->next;
+            p2 = tail;
+            p1 = tail;
         default:
             break;
         }
     }
     write_user_data(head);
+    write_house_data(house_head);
     return 0;
 }
 
