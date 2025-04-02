@@ -11,20 +11,25 @@ int main() {
         choice_5, choice_6, choice_7, choice_8,
         //9:信息统计菜单 10:看房管理菜单 11:租房管理菜单 12:看房预约菜单
         choice_9, choice_10, choice_11, choice_12;
-        //
+        //13：查找菜单 14：简单查询菜单 15：范围查询菜单 17：组合查询菜单
     int choice_13, choice_14, choice_15, choice_16, choice_17;
+    //18：租房管理菜单
+    int choice_18, choice_19;
+
     //退出循环判断
     //0：身份选择 1:中介管理 2:房源管理 3:信息查询 4:信息排序 
     int jug0 = 0, jug1 = 0, jug2 = 0, jug3 = 0, jug4 = 0,
         //5:信息统计 6:看房管理 7:租房管理 8:看房预约
         jug5 = 0, jug6 = 0, jug7 = 0, jug8 = 0;
-    //
+    //9：查找方式 10：简单查询 11：范围查询 12：组合查询
     int jug9 = 0, jug10 = 0, jug11 = 0, jug12 = 0;
-
+    //13：租房管理
+    int jug13 = 0, jug14 = 0;
  
 
     //
     int update_id = 0, delete_id = 0;
+    int a;
 
     //定义用户
     struct User* p1, * p2, * tail, * head;
@@ -56,9 +61,23 @@ int main() {
     house_head->prev = NULL;
 
 
+    //租房定义
+    struct Rent* q1, * q2, * tail1, * head1;
+    q1 = (struct Rent*)malloc(sizeof(struct Rent));//申请空间
+    if (q1 == NULL) { // 判断申请的空间是否为空（NULL）
+        printf("内存空间分配失败\n");
+        return -1;
+    }
+    tail1 = q1; // 标记头尾
+    head1 = q1;
+    q2 = q1;
+    tail1->next = NULL;
+    head1->prev = NULL;
+
     //数据读取
     read_user_data(&tail);
     read_house_data(&house_tail);
+    read_tenant_data(&tail1);
     //主界面
     while (choice_0) {
         printf("******登    录******\n");
@@ -521,27 +540,143 @@ int main() {
                         jug7 = 1;
                         while (jug7)
                         {
-                            //租房管理界面
                             printf("******租房管理******\n");
                             printf("**                **\n");
                             printf("**0.  退    出    **\n");
-                            printf("**1.  新    增    **\n");
-                            printf("**2.  查    看    **\n");
-                            printf("**3.  修    改    **\n");
-                            printf("**4.  删    除    **\n");
+                            printf("**1.  添加租房    **\n");
+                            printf("**2.  删除租房    **\n");
+                            printf("**3.  修改租房    **\n");
                             printf("**                **\n");
                             printf("********************\n");
-                            printf("请选择：");
-                            scanf_s("%d", &choice_11);
-                            clear();
-                            switch (choice_11)
+
+                            scanf("%d", &choice_18);
+                            switch (choice_18)
                             {
                             case 0:
                                 jug7 = 0;
-                                break;
+                                clear();
+                                break; 
+                            case 1: {
+                                        struct Rent* p1;
+                                        p1 = (struct Rent*)malloc(sizeof(struct Rent)); // 申请内存
+                                        if (p1 == NULL) {  // 判断内存是否分配成功
+                                            printf("内存空间分配失败");
+                                            return false;
+                                        }
+                                        addRent(p1, &tail1);
+                                        printf("请输入回车键继续：");
+                                        getchar();
+                                        clear();
+                                        break;
+                                    }
+                            case 2: {
+                                        int id1;
+                                        printf("输入id\n");
+                                        scanf("%d", &id1);
+                                        struct Rent* p1 = findRent(id1, head1);
+                                        //printf("%d", p1->contractTime);
+                                        if (p1 != NULL) {
+                                            if (p1->prev != NULL && p1->next != NULL) {
+                                                deleteRent(&p1->prev, &p1, &p1->next);
+                                            }
+                                            else if (p1->prev == NULL) { p1->next->prev == NULL, free(p1); }
+                                            else if (p1->next == NULL) { p1->prev->next == NULL, free(p1); }
+                                        }
+                                        else printf("没有找到，删除失败");
+                                        printf("请输入回车键继续：");
+                                        getchar();
+                                        clear();
+                                        break;
+                                    }
+                            case 3: {
+                                        int choice; int id1;
+                                        printf("输入id\n");
+                                        scanf("%d", &id1);
+                                        struct Rent* p1 = findRent(id1, head1);
+                                        if (p1 != NULL) {
+                                            printf("请选择要修改的租房信息字段:\n");
+                                            printf("1. 租房编号\n");
+                                            printf("2. 合同签订日期\n");
+                                            printf("3. 出租开始日期\n");
+                                            printf("4. 预计出租时长\n");
+                                            printf("5. 中介姓名\n");
+                                            printf("6. 租客姓名\n");
+                                            printf("7. 房源ID\n");
+                                            printf("8. 房源位置\n");
+                                            printf("9. 租赁状态\n");
+                                            printf("0. 退出修改\n");
+
+                                            scanf("%d", &choice);
+                                            while (choice != 0) {
+                                                switch (choice) {
+                                                case 1:
+                                                    printf("请输入新的租房编号: ");
+                                                    scanf("%d", &p1->id);
+                                                    break;
+                                                case 2:
+                                                    printf("请输入新的合同签订日期: ");
+                                                    scanf("%d", &p1->contractTime);
+                                                    break;
+                                                case 3:
+                                                    printf("请输入新的出租开始日期: ");
+                                                    scanf("%d", &p1->rentStartTime);
+                                                    break;
+                                                case 4:
+                                                    printf("请输入新的预计出租时长: ");
+                                                    scanf("%d", &p1->rentDuration);
+                                                    break;
+                                                case 5:
+                                                    printf("请输入新的中介姓名: ");
+                                                    scanf("%s", p1->agentname);
+                                                    break;
+                                                case 6:
+                                                    printf("请输入新的租客姓名: ");
+                                                    scanf("%s", p1->tenantname);
+                                                    break;
+                                                case 7:
+                                                    printf("请输入新的房源ID: ");
+                                                    scanf("%d", &p1->house_id);
+                                                    break;
+                                                case 8://没写
+                                                    printf("请输入新的房源位置: ");
+                                                    break;
+                                                case 9:
+                                                    printf("请输入新的租赁状态 (0-已完成, 1-正在租): ");
+                                                    scanf("%d", &p1->statement);
+                                                    break;
+                                                default:
+                                                    printf("无效选项，请重新输入\n");
+                                                }
+
+                                                // 继续显示菜单，允许用户继续修改
+                                                printf("\n请选择要修改的租房信息字段:\n");
+                                                printf("1. 租房编号\n");
+                                                printf("2. 合同签订日期\n");
+                                                printf("3. 出租开始日期\n");
+                                                printf("4. 预计出租时长\n");
+                                                printf("5. 中介姓名\n");
+                                                printf("6. 租客姓名\n");
+                                                printf("7. 房源ID\n");
+                                                printf("8. 房源位置\n");
+                                                printf("9. 租赁状态\n");
+                                                printf("0. 退出修改\n");
+
+                                                scanf("%d", &choice);
+                                            }
+                                            printf("修改完成！\n");
+                                        }
+                                        else printf("没有找到，修改失败");
+                                        printf("请输入回车键继续：");
+                                        getchar();
+                                        clear();
+                                        break;
+                                    }
+                                   
+                                   
                             default:
                                 jug7 = 0;
                                 break;
+                                
                             }
                         }
                         break;
@@ -808,5 +943,6 @@ int main() {
     }
     write_user_data(head);
     write_house_data(house_head);
+    write_tenant_data(head1);
     return 0;
 }

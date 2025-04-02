@@ -113,3 +113,60 @@ bool write_house_data(struct House* headp) {
 	return true;
 }
 
+
+
+
+
+bool read_tenant_data(struct Rent** tailp)
+{
+	FILE* fp;
+
+	fp = fopen("tenant.bin", "rb");
+
+	if (fp == NULL)
+	{
+		printf("找不到指定文件!\n");
+		return false;
+	}
+
+	struct Rent* p;
+	p = NULL;
+	while (!feof(fp))
+	{
+		p = (struct Rent*)malloc(sizeof(struct Rent));
+		assert(p);
+		fread(p, sizeof(struct Rent), 1, fp);
+		(*tailp)->next = p;
+		p->prev = (*tailp);
+		(*tailp) = p;
+		p->next = NULL;
+		printf("%d\n", p->id);
+	}
+	assert(p);
+	*tailp = p->prev;
+	p->prev->next = NULL;
+	free(p);
+	p = NULL;
+	fclose(fp);
+	return true;
+}
+bool write_tenant_data(struct Rent* headp) {
+	FILE* fp;
+	fp = fopen("tenant.bin", "wb");
+
+	if (fp == NULL)
+	{
+		printf("找不到指定文件!\n");
+		return false;
+	}
+	struct Rent* p;
+	p = headp->next;
+	while (p != NULL)
+	{
+		assert(p);
+		fwrite(p, sizeof(struct Rent), 1, fp);
+		p = p->next;
+	}
+	fclose(fp);
+	return true;
+}

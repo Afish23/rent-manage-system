@@ -403,3 +403,40 @@ bool deleteHouse(int house_id, struct House* head) {
     }
     return false;  // 未找到对应房源，删除失败
 }
+
+
+
+
+bool addRent(struct Rent* p1, struct Rent** tail) {
+    // 将新节点加入租房链表
+    printf("请输入租房信息:\n");
+    printf("请输入租房 ID: ");
+    scanf("%d", &p1->id);
+    printf("请输入合同时间（例如：20250401）: ");
+    scanf("%d", &p1->contractTime);
+    printf("请输入租房开始时间（例如：20250401）: ");
+    scanf("%d", &p1->rentStartTime);
+    printf("请输入租期（单位：月）: ");
+    scanf("%d", &p1->rentDuration);
+    p1->statement = 1;  // 假设 1 表示有效状态
+    (*tail)->next = p1;
+    p1->prev = (*tail);
+    (*tail) = p1;
+    (*tail)->next = NULL;
+    printf("储存成功\n");
+    return true;
+}
+struct Rent* findRent(int id1, struct Rent* head1) {
+    while (head1 != NULL) {
+        if (head1->id == id1)return head1;
+        head1 = head1->next;
+    }
+    return NULL;
+}
+void deleteRent(struct Rent** prev, struct Rent** head1, struct Rent** next) {
+    printf("%d\n", 3);
+    (*prev)->next = (*next);
+    (*next)->prev = (*prev);
+    free(*head1);
+    printf("删除成功");
+}
