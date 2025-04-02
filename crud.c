@@ -309,7 +309,7 @@ int addHouse(struct House*newHouse,struct House* head, struct House* tail, struc
     newHouse->prev = tail;
     tail->next = newHouse;
     newHouse->next = NULL;
-    printf("添加成功!");
+    printf("添加成功!\n");
     return 0;
 }
 
