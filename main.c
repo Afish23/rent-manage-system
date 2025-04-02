@@ -136,8 +136,9 @@ int main() {
                                 jug1 = 0;
                                 break;
                             case 1:
-                                addHouse(house_head, house_tail, head, tail);
-                                write_house_data(house_head);
+                                addHouse(house_p1,house_head, house_tail, head, tail);
+                                house_tail = house_tail->next;
+                               
                                 break;
                             case 2: 
                                 printf("请输入要修改的房源ID：");
@@ -294,7 +295,7 @@ int main() {
                         continue;
                     case 7:
                         register_user(1, p1, p2, tail, head);
-                        write_user_data(head);
+                      
                         continue;
                     case 8:
                         jug1 = 1;
@@ -319,7 +320,7 @@ int main() {
                                 break;
                             case 1:
                                 register_user(2, p1, p2, tail, head);
-                                write_user_data(head);
+                             
                                 continue;
                             case 2:
                                 updatePassword(2, p1, head);
@@ -442,11 +443,12 @@ int main() {
             break;
         case 2:
             register_user(3, p1, p2, tail, head);
-            write_user_data(head);
+            
         default:
             break;
         }
     }
-
+    write_user_data(head);
+    write_house_data(house_head);
     return 0;
 }

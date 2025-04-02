@@ -200,8 +200,8 @@ void deleteMyUser(struct User* current_p, struct User* tail)
 }
 
 //添加房源
-int addHouse(struct House** head, struct House** tail, struct User* user_agency, struct User* user_custome) {
-    struct House* newHouse = (struct House*)malloc(sizeof(struct House));
+int addHouse(struct House*newHouse,struct House* head, struct House* tail, struct User* user_agency, struct User* user_custome) {
+    newHouse = (struct House*)malloc(sizeof(struct House));
     if (newHouse == NULL) {
         printf("内存分配失败\n");
         return -1;
@@ -277,21 +277,11 @@ int addHouse(struct House** head, struct House** tail, struct User* user_agency,
     printf("请输入房源状态（0: 可租, 1: 已租, 2: 申请中）: ");
     scanf("%d", &newHouse->status);
 
-    // 设置链表的前后指针
-    newHouse->prev = *tail;
-    if (*tail != NULL)
-        (*tail)->next = newHouse; // 将尾节点指向新房源
-
-    newHouse->next = NULL; // 新房源的后继指针为空
-
-    // 更新tail指针
-    *tail = newHouse;
-    if (*head == NULL) {
-        *head = newHouse; // 如果链表为空，设置新房源为头节点
-    }
-    clear();
+    newHouse->prev = tail;
+    tail->next = newHouse;
+    newHouse->next = NULL;
     printf("添加成功!");
-    return 0; // 房源添加成功
+    return 0;
 }
 
 //修改房源

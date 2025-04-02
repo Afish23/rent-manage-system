@@ -13,9 +13,50 @@ void simpleQueryHouse1(struct House* head) {
 
     while (p != NULL) {
         if (strcmp(p->city, city) == 0) {
-            printf("找到房源信息：\n");
-            printf("房间号：%d\n", p->id);
+            printf("房源ID：%d\n", p->id);
+            printf("房间号：%d\n", p->house_id);
+            printf("房主名字：%s\n", p->houseowner);
+            printf("房主电话：%s\n", p->number);
             printf("所在市：%s\n", p->city);
+            printf("所在县/区：%s\n", p->urban);
+            printf("所在小区：%s\n", p->community);
+            printf("楼层：%d\n", p->floor);
+            printf("朝向：");
+            switch ((int)p->toward)
+            {
+            case 1:
+                printf("东\n");
+                break;
+            case 2:
+                printf("南\n");
+                break;
+            case 3:
+                printf("西\n");
+                break;
+            case 4:
+                printf("北\n");
+                break;
+            case 5:
+                printf("东南\n");
+                break;
+            case 6:
+                printf("东北\n");
+                break;
+            case 7:
+                printf("西南\n");
+                break;
+            case 8:
+                printf("西北\n");
+                break;
+
+            }
+            printf("室厅：%d室%d厅\n", p->room,p->hall);
+            printf("面积：%f\n", p->Area);
+            printf("装修情况（已/未装修）：%s\n", p->fitment);
+            printf("租金：%f\n", p->rent);
+            printf("租房日期：%d-%d\n", p->time1,p->time2);
+            printf("中介：%s\n", p->agentname);
+            printf("租客：%s\n", p->tenantname);
             found = 1;
         }
         p = p->next;
@@ -24,7 +65,7 @@ void simpleQueryHouse1(struct House* head) {
     if (!found) {
         printf("未找到符合条件的房源信息。\n");
     }
-    clear();
+
 }
 
 // 2. 按所在县/区查询房源

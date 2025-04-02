@@ -16,6 +16,6 @@ void deleteUser(int input_role, struct User* p1, struct User* head, struct User*
 
 //修改自己密码
 void updateMyPassword(struct User* current_p);
-
+ 
 //删除自己
 void deleteMyUser(struct User* current_p, struct User* tail);
