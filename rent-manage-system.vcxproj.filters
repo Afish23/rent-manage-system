@@ -30,6 +30,9 @@
     <ClInclude Include="auth.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="inquire.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data.c">
@@ -47,12 +50,21 @@
     <ClCompile Include="auth.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="inquire.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="user.bin">
       <Filter>资源文件</Filter>
     </None>
     <None Include="house.bin">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="rent.bin">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="appointment.bin">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
