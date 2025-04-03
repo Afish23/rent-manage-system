@@ -11,3 +11,4 @@ void simpleQueryHouse7(struct House* head);
 void rangeQueryFloor(struct House* head);
 void rangeQueryArea(struct House* head);
 void rangeQueryRent(struct House* head);
+void combinedQueryHouse(struct House* head);

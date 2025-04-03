@@ -351,6 +351,15 @@ int main() {
                                         }
 
                                         break;
+                                    case 3:
+                                        combinedQueryHouse(head);
+
+                                        break;
+
+                                     default:
+                                        printf("无效选项，请重新选择。\n");
+                                        clear();
+                                        break;
 
                                     }
 

@@ -253,11 +253,6 @@ int addHouse(struct House*newHouse,struct House* head, struct House* tail, struc
     printf("请输入房间号: ");
     scanf("%d", &newHouse->house_id);
 
-    printf("请输入房主名字: ");
-    scanf("%s", newHouse->houseowner);
-
-    printf("请输入房主电话: ");
-    scanf("%s", newHouse->number);
 
     printf("请输入所在市: ");
     scanf("%s", newHouse->city);
