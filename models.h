@@ -41,7 +41,7 @@ struct House {
     int time1, time2;//租房开始/结束日期
     char agentname[20];//中介姓名
     char tenantname[20];//租客姓名
-    int status;  // 0-可租 1-已租 2-申请中
+    int status;  // 0-可租 1-已租
 };
 
 struct Appointment//预约信息
