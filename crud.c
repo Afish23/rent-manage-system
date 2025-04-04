@@ -303,6 +303,12 @@ int addHouse(struct House* head, struct House* tail) {
     printf("请输入房间号: ");
     scanf("%d", &newHouse->house_id);
 
+    printf("请输入房主名字: ");
+    scanf("%s", &newHouse->houseowner);
+
+    printf("请输入房主电话: ");
+    scanf("%s", &newHouse->number);
+
 
     printf("请输入所在市: ");
     scanf("%s", &newHouse->city);
@@ -333,14 +339,19 @@ int addHouse(struct House* head, struct House* tail) {
     printf("请输入装修情况: ");
     scanf("%s", &newHouse->fitment);
 
-   newHouse->status = 0;
+    printf("请输入租金: ");
+    scanf("%f", &newHouse->rent);
 
-    newHouse->rent = 0;
-    newHouse->agency_fee = 0;
-    newHouse->deposit = 0;
+    printf("请输入中介费: ");
+    scanf("%f", &newHouse->agency_fee);
 
-    newHouse->time1 = 0;
-    newHouse->time2 = 0;
+    printf("请输入押金: ");
+    scanf("%f", &newHouse->deposit);
+
+    newHouse->status = 0;
+
+    newHouse->rentStartTime = 0;
+    newHouse->rentDuration = 0;
 
     strcpy(newHouse->agentname, "");
     strcpy(newHouse->tenantname, "");
@@ -370,6 +381,9 @@ bool updateHouse(struct House* head) {
             int new_hall;
 
             char new_fitment[100];
+            float new_rent;
+            float new_agency_fee;
+            float new_deposit;
 
             // 提示用户输入新的房源信息
             printf("请输入新的房东姓名: ");
@@ -385,6 +399,13 @@ bool updateHouse(struct House* head) {
             printf("请输入新的装修情况: ");
             scanf("%s", new_fitment);
 
+            printf("请输入新的租金: ");
+            scanf("%f", &new_rent);
+            printf("请输入新的中介费: ");
+            scanf("%f", &new_agency_fee);
+            printf("请输入新的押金: ");
+            scanf("%f", &new_deposit);
+
             // 更新房源的各个信息
             strcpy(current->houseowner, new_houseowner);
             strcpy(current->number, new_phoneNumber);
@@ -393,6 +414,9 @@ bool updateHouse(struct House* head) {
             current->hall = new_hall;
 
             strcpy(current->fitment, new_fitment);
+            current->rent = new_rent;
+            current->agency_fee = new_agency_fee;
+            current->deposit = new_deposit;
 
             printf("房源信息更新成功！\n");
             getchar();
@@ -443,7 +467,7 @@ bool deleteHouse(struct House* head) {
 
 
 //添加租房信息
-bool addRent(struct Rent** tail) {
+bool addRent(struct Rent** tail1, struct User* agent, struct House* head) {
     struct Rent* p1;
     p1 = (struct Rent*)malloc(sizeof(struct Rent)); // 申请内存
     if (p1 == NULL) {  // 判断内存是否分配成功
@@ -454,31 +478,52 @@ bool addRent(struct Rent** tail) {
     printf("请输入租房信息:\n");
     printf("请输入租房 ID: ");
     scanf("%d", &p1->id);
-    printf("请输入合同时间（例如：20250401）: ");
+    printf("请输入合同签订时间（例如：20250401）: ");
     scanf("%d", &p1->contractTime);
     printf("请输入租房开始时间（例如：20250401）: ");
     scanf("%d", &p1->rentStartTime);
     printf("请输入租期（单位：月）: ");
     scanf("%d", &p1->rentDuration);
-    p1->statement = 1;  // 假设 1 表示有效状态
-    (*tail)->next = p1;
-    p1->prev = (*tail);
-    (*tail) = p1;
-    (*tail)->next = NULL;
-    printf("储存成功\n");
+    printf("请输入房源ID: ");
+    scanf("%d", &p1->house_id);
+    printf("请输入租客姓名: ");
+    scanf("%s", &p1->tenantname);
+    strcpy(p1->agentname, agent->username);
+    struct House* current = head->next;  // 从头部开始遍历
+    while (current != NULL) {
+        if (current->id == p1->house_id && current->status == 0) {  // 找到匹配的房源
+            current->rentStartTime = p1->rentStartTime;
+            current->rentDuration = p1->rentDuration;
+            strcpy(current->tenantname, p1->tenantname);
+            strcpy(current->agentname, p1->agentname);
+            current->status = 1;
+            p1->statement = 1;  // 假设 1 表示有效状态
+            (*tail1)->next = p1;
+            p1->prev = (*tail1);
+            (*tail1) = p1;
+            (*tail1)->next = NULL;
+            printf("租房成功\n");
+            printf("请输入回车键继续：");
+            getchar();
+            clear();
+            return true;
+        }
+        current = current->next;  // 继续向后遍历
+    }
+    printf("租房失败\n");
     printf("请输入回车键继续：");
     getchar();
     clear();
-    return true;
+    return false;;
 }
 
-void printRentsInOrder(struct Rent* head) {
-    if (head->next == NULL) {
+void printRentsInOrder(struct Rent* head1) {
+    if (head1->next == NULL) {
         printf("链表为空，没有租房信息。\n");
         return;
     }
 
-    struct Rent* current = head->next;
+    struct Rent* current = head1->next;
     int count = 1;
 
     while (current != NULL) {
@@ -499,20 +544,50 @@ void printRentsInOrder(struct Rent* head) {
     clear();
 }
 
+void printMyRentsInOrder(struct Rent* head1, struct User* tenant) {
+    if (head1->next == NULL) {
+        printf("链表为空，没有租房信息。\n");
+        return;
+    }
+
+    struct Rent* current = head1->next;
+    int count = 1;
+
+    while (current != NULL) {
+        if (!strcmp(current->tenantname, tenant->username)) {
+            printf("租房信息 %d:\n", count++);
+            printf("  租房编号: %d\n", current->id);
+            printf("  合同签订日期: %d\n", current->contractTime);
+            printf("  出租开始日期: %d\n", current->rentStartTime);
+            printf("  预计出租时长: %d\n", current->rentDuration);
+            printf("  中介姓名: %s\n", current->agentname);
+            printf("  房源ID: %d\n", current->house_id);
+            printf("  状态: %s\n", current->statement == 0 ? "已完成" : "正在租");
+            printf("\n");
+        }
+        current = current->next; // 移动到下一个节点
+    }
+    if (count == 0) {
+        printf("您没有租房信息。\n");
+    }
+    getchar();
+    clear();
+}
+
 //查找租房信息
-struct Rent* findRent(int id1, struct Rent* head1) {
+struct Rent* findRent(int id, struct Rent* head1) {
     while (head1 != NULL) {
-        if (head1->id == id1)return head1;
+        if (head1->id == id)return head1;
         head1 = head1->next;
     }
     return NULL;
 }
 
 void updateRent(struct Rent* head1) {
-    int choice,jug = 1,id1;
+    int choice,jug = 1,id;
     printf("输入id\n");
-    scanf("%d", &id1);
-    struct Rent* p1 = findRent(id1, head1);
+    scanf("%d", &id);
+    struct Rent* p1 = findRent(id, head1);
     if (p1 != NULL) {
         while (jug) {
             printf("请选择要修改的租房信息字段:\n");
@@ -629,8 +704,9 @@ bool deleteRent(struct Rent* head1) {
     return false;  // 未找到对应信息，删除失败
 }
 
-bool addAppointment(struct Appointment** tai2) {
+bool addAppointment(struct Appointment** tail2, struct User* tenant) {
     struct Appointment* r1;
+    int choice;
     r1 = (struct Appointment*)malloc(sizeof(struct Appointment)); // 申请内存
     if (r1 == NULL) {  // 判断内存是否分配成功
         printf("内存空间分配失败");
@@ -640,15 +716,31 @@ bool addAppointment(struct Appointment** tai2) {
     printf("请输入看房信息:\n");
     printf("请输入看房 ID: ");
     scanf("%d", &r1->id);
+    //TODO 判断房源是否存在
+    printf("请输入房源 ID: ");
+    scanf("%d", &r1->house_id);
     printf("请输入看房时间（例如：20250401）: ");
     scanf("%d", &r1->time);
-    printf("请输入看房时长（例如：0.5代表0.5小时）: ");
-    scanf("%d", &r1->duration);
+    //TODO 判断中介是否存在
+    printf("是否指定中介？1：是，2：否: ");
+    scanf("%d", &choice);
+    if (choice == 1) {
+        printf("请输入中介姓名: ");
+        scanf("%s", &r1->agentname);
+        printf("指定中介成功\n");
+    }
+    else {
+        printf("未指定中介，将由公司统一分配\n");
+        strcpy(r1->agentname, "未分配");
+    }
+    strcpy(r1->tenantname, tenant->username);
+    r1->duration = 0;
     r1->statement = 0;  // 假设 1 表示已完成
-    (*tai2)->next = r1;
-    r1->prev = (*tai2);
-    (*tai2) = r1;
-    (*tai2)->next = NULL;
+    strcpy(r1->feedback, "");
+    (*tail2)->next = r1;
+    r1->prev = (*tail2);
+    (*tail2) = r1;
+    (*tail2)->next = NULL;
     printf("储存成功\n");
     printf("请输入回车键继续：");
     getchar();
@@ -656,13 +748,124 @@ bool addAppointment(struct Appointment** tai2) {
     return true;
 }
 
-void printAppointmentsInOrder(struct Appointment* head) {
-    if (head->next == NULL) {
+bool addFeedback(struct Appointment* head2, struct User* tenant) {
+    struct Appointment* current = head2->next;
+    int id, count = 0;
+    printf("您可反馈的看房预约如下：\n");
+    while (current != NULL) {
+        // 检查是否为已处理状态 (statement == 1) 且租客姓名匹配
+        if (current->statement == 1 && strcmp(current->tenantname, tenant->username) == 0) {
+            count++;
+            printf("看房编号: %d\n", current->id);
+            printf("看房时间: %d\n", current->time);
+            printf("看房时长: %d\n", current->duration);
+            printf("中介姓名: %s\n", current->agentname);
+            printf("房源ID: %d\n", current->house_id);
+            printf("-----------------------------\n");
+        }
+        // 移动到下一个节点
+        current = current->next;
+    }
+    if (count == 0) {
+        printf("您没有可反馈的看房预约\n");
+        printf("请输入回车键继续：");
+        getchar();
+        clear();
+        return false;
+    }
+    printf("请输入要反馈的看房预约id\n");
+    scanf("%d", &id);
+    struct Appointment* p = findAppointment(id, head2);
+    if (p != NULL) {
+        printf("请输入看房反馈: ");
+        scanf("%s", &p->feedback);
+        printf("反馈看房预约成功\n");
+        printf("请输入回车键继续：");
+        getchar();
+        clear();
+        return true;
+    }
+    printf("没有该预约\n");
+    printf("请输入回车键继续：");
+    getchar();
+    clear();
+    return false;
+}
+
+bool handleAppointment(struct Appointment* head2, struct User* agent) {
+    struct Appointment* current = head2->next;
+    int id, count = 0;
+    printf("您的待处理预约如下：\n");
+    while (current != NULL) {
+        // 检查是否为待处理状态 (statement == 0) 且中介姓名匹配
+        if (current->statement == 0 && strcmp(current->agentname, agent->username) == 0) {
+            count++;
+            printf("看房编号: %d\n", current->id);
+            printf("看房时间: %d\n", current->time);
+            printf("租客姓名: %s\n", current->tenantname);
+            printf("房源ID: %d\n", current->house_id);
+            printf("-----------------------------\n");
+        }
+        // 移动到下一个节点
+        current = current->next;
+    }
+    if (count == 0) {
+        printf("您没有要处理的预约\n");
+        printf("请输入回车键继续：");
+        getchar();
+        clear();
+        return false;
+    }
+    printf("请输入要处理的预约id\n");
+    scanf("%d", &id);
+    struct Appointment* p = findAppointment(id, head2);
+    if (p != NULL) {
+        printf("请输入看房时长（例如：0.5代表0.5小时）: ");
+        scanf("%d", &p->duration);
+        p->statement = 1;
+        printf("处理预约成功\n");
+        printf("请输入回车键继续：");
+        getchar();
+        clear();
+        return true;
+    }
+    printf("没有该预约\n");
+    printf("请输入回车键继续：");
+    getchar();
+    clear();
+    return false;
+}
+
+
+bool appointAgent(struct Appointment* head2) {
+    int id;
+    printf("请输入预约id\n");
+    scanf("%d", &id);
+    struct Appointment* p = findAppointment(id, head2);
+    if (!strcmp(p->agentname,"未分配")) {
+        //TODO 判断中介是否存在
+        printf("请输入中介姓名: ");
+        scanf("%19s", &p->agentname);
+        printf("指定成功");
+        getchar();
+        clear();
+        return true;
+    }
+    else {
+        printf("该预约已存在中介");
+        getchar();
+        clear();
+        return false;
+    }
+}
+
+void printAppointmentsInOrder(struct Appointment* head2) {
+    if (head2->next == NULL) {
         printf("链表为空，没有预约信息。\n");
         return;
     }
 
-    struct Appointment* current = head->next;
+    struct Appointment* current = head2->next;
     int count = 1;
 
     while (current != NULL) {
@@ -683,10 +886,41 @@ void printAppointmentsInOrder(struct Appointment* head) {
     clear();
 }
 
-struct Appointment* findAppointment(int id1, struct Appointment* head1) {
-    while (head1 != NULL) {
-        if (head1->id == id1)return head1;
-        head1 = head1->next;
+void printMyAppointmentsInOrder(struct Appointment* head2, struct User* tenant) {
+    if (head2->next == NULL) {
+        printf("链表为空，没有预约信息。\n");
+        return;
+    }
+
+    struct Appointment* current = head2->next;
+    int count = 1;
+
+    while (current != NULL) {
+        if (!strcmp(current->tenantname, tenant->username)) {
+            printf("预约信息 %d:\n", count++);
+            printf("  看房编号: %d\n", current->id);
+            printf("  看房时间: %d\n", current->time);
+            printf("  看房时长: %d\n", current->duration);
+            printf("  中介姓名: %s\n", current->agentname);
+            printf("  房源ID: %d\n", current->house_id);
+            printf("  租客反馈: %s\n", current->feedback);
+            printf("  状态: %s\n", current->statement == 0 ? "待处理" : "已完成");
+            printf("\n");
+        }
+
+        current = current->next; // 移动到下一个节点
+    }
+    if (count == 0) {
+        printf("您没有预约信息。\n");
+    }
+    getchar();
+    clear();
+}
+
+struct Appointment* findAppointment(int id, struct Appointment* head2) {
+    while (head2 != NULL) {
+        if (head2->id == id)return head2;
+        head2 = head2->next;
     }
     return NULL;
 }

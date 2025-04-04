@@ -36,13 +36,16 @@ bool updateHouse(struct House* head);
 bool deleteHouse(struct House* head);
 
 //添加租房信息
-bool addRent(struct Rent** tail);
+bool addRent(struct Rent** tail1, struct User* agent, struct House* head);
 
 // 按照顺序输出所有租房信息
-void printRentsInOrder(struct Rent* head);
+void printRentsInOrder(struct Rent* head1);
+
+// 按照顺序输出所有自己租房信息
+void printMyRentsInOrder(struct Rent* head1, struct User* tenant);
 
 //查找租房信息
-struct Rent* findRent(int id1, struct Rent* head1);
+struct Rent* findRent(int id, struct Rent* head1);
 
 //更新租房信息
 void updateRent(struct Rent* head1);
@@ -51,13 +54,25 @@ void updateRent(struct Rent* head1);
 bool deleteRent(struct Rent* head1);
 
 //添加预约信息
-bool addAppointment(struct Appointment** tail);
+bool addAppointment(struct Appointment** tail2, struct User* tenant);
+
+//添加反馈
+bool addFeedback(struct Appointment* head2, struct User* tenant);
+
+//处理预约信息
+bool handleAppointment(struct Appointment* head2, struct User* agent);
+
+//指定中介
+bool appointAgent(struct Appointment* head2);
 
 // 按照顺序输出所有预约信息
-void printAppointmentsInOrder(struct Appointment* head);
+void printAppointmentsInOrder(struct Appointment* head2);
+
+// 按照顺序输出所有自己预约信息
+void printMyAppointmentsInOrder(struct Appointment* head2, struct User* tenant);
 
 //查找预约信息
-struct Appointment* findAppointment(int id1, struct Appointment* head1);
+struct Appointment* findAppointment(int id, struct Appointment* head2);
 
 //更新预约信息
 void updateAppointment(struct Appointment* head2);
