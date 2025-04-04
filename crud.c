@@ -333,17 +333,17 @@ int addHouse(struct House* head, struct House* tail) {
     printf("请输入装修情况: ");
     scanf("%s", &newHouse->fitment);
 
-    printf("请输入租金: ");
-    scanf("%f", &newHouse->rent);
+   newHouse->status = 0;
 
-    printf("请输入中介费: ");
-    scanf("%f", &newHouse->agency_fee);
+    newHouse->rent = 0;
+    newHouse->agency_fee = 0;
+    newHouse->deposit = 0;
 
-    printf("请输入押金: ");
-    scanf("%f", &newHouse->deposit);
+    newHouse->time1 = 0;
+    newHouse->time2 = 0;
 
-    printf("请输入房源状态（0: 可租, 1: 已租, 2: 申请中）: ");
-    scanf("%d", &newHouse->status);
+    strcpy(newHouse->agentname, "");
+    strcpy(newHouse->tenantname, "");
 
     newHouse->prev = tail;
     tail->next = newHouse;
@@ -370,12 +370,6 @@ bool updateHouse(struct House* head) {
             int new_hall;
 
             char new_fitment[100];
-            float new_rent;
-            float new_agency_fee;
-            float new_deposit;
-            int new_time1;
-            int new_time2;
-            int new_status;
 
             // 提示用户输入新的房源信息
             printf("请输入新的房东姓名: ");
@@ -390,18 +384,6 @@ bool updateHouse(struct House* head) {
 
             printf("请输入新的装修情况: ");
             scanf("%s", new_fitment);
-            printf("请输入新的租金: ");
-            scanf("%f", &new_rent);
-            printf("请输入新的中介费: ");
-            scanf("%f", &new_agency_fee);
-            printf("请输入新的押金: ");
-            scanf("%f", &new_deposit);
-            printf("请输入新的出租时间(始): ");
-            scanf("%d", &new_time1);
-            printf("请输入新的出租时间(终): ");
-            scanf("%d", &new_time2);
-            printf("请输入新的房源状态(0=空闲, 1=已租,2=申请中): ");
-            scanf("%d", &new_status);
 
             // 更新房源的各个信息
             strcpy(current->houseowner, new_houseowner);
@@ -411,12 +393,6 @@ bool updateHouse(struct House* head) {
             current->hall = new_hall;
 
             strcpy(current->fitment, new_fitment);
-            current->rent = new_rent;
-            current->agency_fee = new_agency_fee;
-            current->deposit = new_deposit;
-            current->time1 = new_time1;
-            current->time2 = new_time2;
-            current->status = new_status;
 
             printf("房源信息更新成功！\n");
             getchar();
@@ -430,6 +406,7 @@ bool updateHouse(struct House* head) {
     clear();
     return false;  // 未找到对应房源，修改失败
 }
+
 //删除房源
 bool deleteHouse(struct House* head) {
     int house_id;
