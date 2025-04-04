@@ -501,7 +501,7 @@ int main() {
                             printf("******看房管理******\n");
                             printf("**                **\n");
                             printf("**0.  退    出    **\n");
-                            printf("**1.  查    看    **\n");
+                            printf("**1.  处理预约    **\n");
                             printf("**2.  修    改    **\n");
                             printf("**3.  删    除    **\n");
                             printf("**                **\n");
@@ -545,8 +545,8 @@ int main() {
                                 jug7 = 0;
                                 break;
                             case 1: 
-                                  addRent(&tail1);
-                                  continue;
+                                addRent(&tail1);
+                                continue;
                             case 3: 
                                 updateRent(head1);
                                 continue;
@@ -712,6 +712,7 @@ int main() {
                             printf("**2.  查    看    **\n");
                             printf("**3.  修    改    **\n");
                             printf("**4.  删    除    **\n");
+                            printf("**5.  添加反馈    **\n");
                             printf("**                **\n");
                             printf("********************\n");
                             printf("请选择：");
