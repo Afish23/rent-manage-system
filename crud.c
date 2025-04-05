@@ -379,6 +379,7 @@ bool updateHouse(struct House* head) {
 
             int new_room;
             int new_hall;
+            int new_status;
 
             char new_fitment[100];
             float new_rent;
@@ -406,6 +407,9 @@ bool updateHouse(struct House* head) {
             printf("请输入新的押金: ");
             scanf("%f", &new_deposit);
 
+            printf("请输入房源状态: ");
+            scanf("%d", &new_status);
+
             // 更新房源的各个信息
             strcpy(current->houseowner, new_houseowner);
             strcpy(current->number, new_phoneNumber);
@@ -417,6 +421,7 @@ bool updateHouse(struct House* head) {
             current->rent = new_rent;
             current->agency_fee = new_agency_fee;
             current->deposit = new_deposit;
+            current->status = new_status;
 
             printf("房源信息更新成功！\n");
             getchar();
@@ -549,7 +554,9 @@ void printMyRentsInOrder(struct Rent* head1, struct User* tenant) {
         printf("链表为空，没有租房信息。\n");
         return;
     }
-
+    else {
+        printf("您的租房信息如下：\n");
+    }
     struct Rent* current = head1->next;
     int count = 1;
 
@@ -890,6 +897,9 @@ void printMyAppointmentsInOrder(struct Appointment* head2, struct User* tenant) 
     if (head2->next == NULL) {
         printf("链表为空，没有预约信息。\n");
         return;
+    }
+    else {
+        printf("您的预约信息如下：\n");
     }
 
     struct Appointment* current = head2->next;

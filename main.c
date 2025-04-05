@@ -4,6 +4,8 @@
 #include "auth.h"
 #include "crud.h"
 #include "inquire.h"
+#include "statistics.h"
+#include "sort.h"
 int main() {
 
     //0：主菜单 1：身份选择菜单 2：管理员菜单 3：中介菜单 4：租客菜单
@@ -15,14 +17,16 @@ int main() {
         //13：查找菜单 14：简单查询菜单 15：范围查询菜单 16：组合查询菜单
         choice_13, choice_14, choice_15, choice_16,
         //17： 18：租房管理菜单 19:租房信息更改菜单
-        choice_17, choice_18, choice_19;
+        choice_17, choice_18, choice_19,
+        choice_20, choice_21, choice_22, choice_23, choice_24, choice_25;
     //退出循环判断
         //0：身份选择 1:中介管理 2:房源管理 3:信息查询 4:信息排序 
     int jug0 = 0, jug1 = 0, jug2 = 0, jug3 = 0, jug4 = 0,
         //5:信息统计 6:看房管理 7:租房管理 8:看房预约 9:查询方式
         jug5 = 0, jug6 = 0, jug7 = 0, jug8 = 0, jug9 = 0,
         //10：简单查询 11：范围查询 12：组合查询 13：租房管理 14:租房信息更改
-        jug10 = 0, jug11 = 0, jug12 = 0, jug13 = 0, jug14 = 0;
+        jug10 = 0, jug11 = 0, jug12 = 0, jug13 = 0, jug14 = 0,
+        jug15 = 0, jug16 = 0, jug17 = 0, jug18 = 0, jug19 = 0, jug20 = 0;
 
 
     struct User* p1, * p2, * tail, * head;
@@ -173,6 +177,7 @@ int main() {
                                 continue;
                             case 1:
                                 addHouse(house_head, house_tail);
+                                house_tail = house_tail->next;
                                 continue;
                             case 2:
                                 updateHouse(house_head);
@@ -360,11 +365,163 @@ int main() {
                             case 0:
                                 jug4 = 0;
                                 break;
-                            default:
-                                printf("无效选项，请重新选择。\n");
-                                getchar();
-                                clear();
-                                continue;
+                            case 1:
+                            case 2:
+                            case 3:
+                                jug16 = 1;
+                                while (jug16) {
+                                    printf("******租房信息排序******\n");
+                                    printf("**                    **\n");
+                                    printf("**0.  退    出        **\n");
+                                    printf("**1.  单一排序        **\n");
+                                    printf("**2.  多重排序        **\n");
+                                    printf("**                    **\n");
+                                    printf("************************\n");
+                                    printf("请选择排序方式:\n");
+                                    scanf_s("%d", &choice_21);
+                                    clear();
+                                    if (choice_21 == 0) {
+                                        jug16 = 0;
+                                        break;
+                                    }
+                                    else if (choice_21 == 1) {
+                                        jug15 = 1;
+                                        while (jug15) {
+                                            printf("******租房信息排序********\n");
+                                            printf("**                      **\n");
+                                            printf("**0.  退    出          **\n");
+                                            printf("**1.  按租房编号排序    **\n");
+                                            printf("**2.  按合同签订日期排序**\n");
+                                            printf("**3.  按出租开始日期排序**\n");
+                                            printf("**4.  按预计出租时长排序**\n");
+                                            printf("**5.  按出租状态排序    **\n");
+                                            printf("**                      **\n");
+                                            printf("**************************\n");
+                                            printf("请选择排序方式:\n");
+                                            scanf_s("%d", &choice_20);
+                                            clear();
+                                            switch (choice_20) {
+                                            case 0:
+                                                jug15 = 0;
+                                                break;
+                                            case 1:
+                                                simpleSortid(&((head1)->next));
+                                                printList((head1)->next);
+                                                continue;
+                                            case 2:
+                                                simpleSortByContractTime(&((head1)->next));
+                                                printList((head1)->next);
+                                                continue;
+                                            case 3:
+                                                simpleSortByRentStartTime(&((head1)->next));
+                                                printList((head1)->next);
+                                                continue;
+                                            case 4:
+                                                simpleSortByRentDuration(&((head1)->next));
+                                                printList((head1)->next);
+                                                continue;
+                                            case 5:
+                                                simpleSortByStatement(&((head1)->next));
+                                                printList((head1)->next);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                    }/**/
+                                    else if (choice_21 == 2) {
+                                        jug15 = 1;
+                                        while (jug15) {
+                                            printf("******租房信息多重排序(前者优先)******\n");
+                                            printf("**                                  **\n");
+                                            printf("**0.  退出                          **\n");
+                                            printf("**1.  按租房编号排序                **\n");
+                                            printf("**2.  按预计出租时长排序            **\n");
+                                            printf("**3.  按出租开始日期排序            **\n");
+                                            printf("**************************************\n");
+                                            printf("请选择两种排序方式:\n");
+                                            scanf_s("%d%d", &choice_20, &choice_21);
+                                            clear();
+                                            switch (choice_20) {
+                                            case 0:
+                                                jug15 = 0;
+                                                break;
+                                            case 1:
+                                                simpleSortid(&((head1)->next));
+                                                switch (choice_21) {
+                                                case 1:
+                                                    printf("您已重复输入，请重新输入\n");
+                                                    continue;
+                                                case 2:
+                                                    multSortid_ByRentDuration(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                case 3:
+                                                    multSortid_ByRentStartTime(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                default:
+                                                    printf("无效选项，请重新选择。\n");
+                                                    getchar();
+                                                    clear();
+                                                    continue;
+                                                }
+                                                continue;
+                                            case 2:
+                                                simpleSortByRentDuration(&((head1)->next));
+                                                switch (choice_21) {
+                                                case 1:
+                                                    multSortRentDuration_Byid(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                case 2:
+                                                    printf("您已重复输入，请重新输入\n");
+                                                    continue;
+                                                case 3:
+                                                    multSortRentDuration_ByRentStartTime(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                default:
+                                                    printf("无效选项，请重新选择。\n");
+                                                    getchar();
+                                                    clear();
+                                                    continue;
+                                                }
+                                                continue;
+                                            case 3:
+                                                simpleSortByRentStartTime(&((head1)->next));
+                                                switch (choice_21) {
+                                                case 1:
+                                                    multSortRentStartTime_Byid(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                case 2:
+                                                    multSortRentStartTime_ByRentDuration(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                case 3:
+                                                    printf("您已重复输入，请重新输入\n");
+                                                    continue;
+                                                default:
+                                                    printf("无效选项，请重新选择。\n");
+                                                    getchar();
+                                                    clear();
+                                                    continue;
+                                                }
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
                             }
                         }
                         break;
@@ -389,6 +546,255 @@ int main() {
                             case 0:
                                 jug5 = 0;
                                 break;
+                            case 1:
+                                jug15 = 1;
+                                while (jug15) {
+
+                                    printf("******统计方式******\n");
+                                    printf("**                **\n");
+                                    printf("**0.  退    出    **\n");
+                                    printf("**1.  单一属性    **\n");
+                                    printf("**2.  多种属性    **\n");
+                                    printf("**3.  预设统计    **\n");
+                                    printf("**4.  条件统计    **\n");
+                                    printf("**                **\n");
+                                    printf("********************\n");
+                                    printf("请选择：");
+                                    scanf_s("%d", &choice_20);
+                                    clear();
+                                    switch (choice_20)
+                                    {
+                                    case 0:
+                                        jug15 = 0;
+                                        break;
+                                    case 1:
+                                        jug16 = 1;
+                                        while (jug16)
+                                        {
+                                            printf("******单一属性统计******\n");
+                                            printf("**                   **\n");
+                                            printf("**  0.退       出     **\n");
+                                            printf("**  1.楼层    统计    **\n");
+                                            printf("**  2.朝向    统计    **\n");
+                                            printf("**  3.租金    统计    **\n");
+                                            printf("**  4.面积    统计    **\n");
+                                            printf("**  5.房间数  统计    **\n");
+                                            printf("**  6.装修情况统计    **\n");
+                                            printf("**                   **\n");
+                                            printf("***********************\n");
+                                            printf("请选择：");
+                                            scanf_s("%d", &choice_21);
+                                            clear();
+                                            switch (choice_21)
+                                            {
+                                            case 0:
+                                                jug16 = 0;
+                                                break;
+                                            case 1:
+                                                statisHousesFloor(house_head);
+                                                continue;
+                                            case 2:
+                                                statisHousesToward(house_head);
+                                                continue;
+                                            case 3:
+                                                statisHousesRent(house_head);
+                                                continue;
+                                            case 4:
+                                                statisHousesArea(house_head);
+                                                continue;
+                                            case 5:
+                                                statisHousesRoom(house_head);
+                                                continue;
+                                            case 6:
+                                                statisHousesFitment(house_head);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                        continue;
+                                    case 2:
+                                        jug17 = 1;
+                                        while (jug17)
+                                        {
+                                            printf("********多种属性统计********\n");
+                                            printf("**                       **\n");
+                                            printf("**  0.退           出    **\n");
+                                            printf("**  1.租金和面积  统计    **\n");
+                                            printf("**  2.朝向和楼层  统计    **\n");
+                                            printf("**  3.租金和装修  统计    **\n");
+                                            printf("**  4.小区和楼层  统计    **\n");
+                                            printf("**  5.房间数和朝向统计    **\n");
+                                            printf("**                       **\n");
+                                            printf("***************************\n");
+                                            printf("请选择：");
+                                            scanf_s("%d", &choice_22);
+                                            clear();
+                                            switch (choice_22)
+                                            {
+                                            case 0:
+                                                jug17 = 0;
+                                                break;
+                                            case 1:
+                                                statisRentAndArea(house_head);
+                                                continue;
+                                            case 2:
+                                                statisTowardAndFloor(house_head);
+                                                continue;
+                                            case 3:
+                                                statisRentAndFitment(house_head);
+                                                continue;
+                                            case 4:
+                                                statisCommunityAndFloor(house_head);
+                                                continue;
+                                            case 5:
+                                                statisRoomAndToward(house_head);
+                                                continue;
+
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                        continue;
+                                    case 3:
+                                        jug18 = 1;
+                                        while (jug18)
+                                        {
+                                            printf("********预设统计********\n");
+                                            printf("**                    **\n");
+                                            printf("**  0.退       出     **\n");
+                                            printf("**  1.平均出租时间     **\n");
+                                            printf("**  2.出   租   率    **\n");
+                                            printf("**                    **\n");
+                                            printf("***********************\n");
+                                            printf("请选择：");
+                                            scanf_s("%d", &choice_23);
+                                            clear();
+                                            switch (choice_23)
+                                            {
+                                            case 0:
+                                                jug18 = 0;
+                                                break;
+                                            case 1:
+                                                statisAverageRentDuration(house_head);
+                                                continue;
+                                            case 2:
+                                                statisOccupancyRate(house_head);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                        continue;
+                                    case 4:
+
+                                    default:
+                                        printf("无效选项，请重新选择。\n");
+                                        getchar();
+                                        clear();
+                                        continue;
+                                    }
+                                }
+                                continue;
+                            case 2:
+                                jug19 = 1;
+                                while (jug19)
+                                {
+                                    printf("******预约统计******\n");
+                                    printf("**                **\n");
+                                    printf("**0.  退    出    **\n");
+                                    printf("**1.  总    数    **\n");
+                                    printf("**2.  预约完成    **\n");
+                                    printf("**3.  看房时长    **\n");
+                                    printf("**4.  预约时间    **\n");
+                                    printf("**5.  租    客    **\n");
+                                    printf("**                **\n");
+                                    printf("********************\n");
+                                    printf("请选择：");
+                                    scanf_s("%d", &choice_24);
+                                    clear();
+                                    switch (choice_24)
+                                    {
+                                    case 0:
+                                        jug19 = 0;
+                                        break;
+                                    case 1:
+                                        statisTotalAppointments(head2);
+                                        continue;
+                                    case 2:
+                                        statisCompletedAppointments(head2);
+                                        continue;
+                                    case 3:
+                                        statisAppointmentDuration(head2);
+                                        continue;
+                                    case 4:
+                                        statisAppointmentInPeriod(head2);
+                                        continue;
+                                    case 5:
+                                        statisAppointmentByTenant(head2);
+                                        continue;
+                                    default:
+                                        printf("无效选项，请重新选择。\n");
+                                        getchar();
+                                        clear();
+                                        continue;
+                                    }
+                                }
+                                continue;
+                            case 3:
+                                jug20 = 1;
+                                while (jug20)
+                                {
+                                    printf("******租房统计******\n");
+                                    printf("**                **\n");
+                                    printf("**0.  退    出    **\n");
+                                    printf("**1.  总    数    **\n");
+                                    printf("**2.  合同日期    **\n");
+                                    printf("**3.  租房日期    **\n");
+                                    printf("**4.  出租时长    **\n");
+                                    printf("**5.  租    客    **\n");
+                                    printf("**                **\n");
+                                    printf("********************\n");
+                                    printf("请选择：");
+                                    scanf_s("%d", &choice_25);
+                                    clear();
+                                    switch (choice_25)
+                                    {
+                                    case 0:
+                                        jug20 = 0;
+                                        break;
+                                    case 1:
+                                        statisTotalRents(head1);
+                                        continue;
+                                    case 2:
+                                        statisRentDate(head1);
+                                        continue;
+                                    case 3:
+                                        statisContractDate(head1);
+                                        continue;
+                                    case 4:
+                                        statisRentDuration(head1);
+                                        continue;
+                                    case 5:
+                                        statisTenant(head1);
+                                        continue;
+                                    default:
+                                        printf("无效选项，请重新选择。\n");
+                                        getchar();
+                                        clear();
+                                        continue;
+                                    }
+                                }
+                                continue;
                             default:
                                 printf("无效选项，请重新选择。\n");
                                 getchar();
@@ -582,10 +988,9 @@ int main() {
                             printf("******信息查询******\n");
                             printf("**                **\n");
                             printf("**0.  退    出    **\n");
-                            printf("**1.  用户信息    **\n");
-                            printf("**2.  房源信息    **\n");
-                            printf("**3.  预约信息    **\n");
-                            printf("**4.  租房信息    **\n");
+                            printf("**1.  房源信息    **\n");
+                            printf("**2.  预约信息    **\n");
+                            printf("**3.  租房信息    **\n");
                             printf("**                **\n");
                             printf("********************\n");
                             printf("请选择：");
@@ -597,9 +1002,6 @@ int main() {
                                 jug3 = 0;
                                 break;
                             case 1:
-                                printUsersInOrder(head);
-                                continue;
-                            case 2:
                                 jug9 = 1;
                                 while (jug9)
                                 {
@@ -708,10 +1110,10 @@ int main() {
                                     }
                                 }
                                 break;
-                            case 3:
+                            case 2:
                                 printAppointmentsInOrder(head2);
                                 continue;
-                            case 4:
+                            case 3:
                                 printRentsInOrder(head1);
                                 continue;
                             default:
@@ -772,6 +1174,255 @@ int main() {
                             case 0:
                                 jug5 = 0;
                                 break;
+                            case 1:
+                                jug15 = 1;
+                                while (jug15) {
+
+                                    printf("******统计方式******\n");
+                                    printf("**                **\n");
+                                    printf("**0.  退    出    **\n");
+                                    printf("**1.  单一属性    **\n");
+                                    printf("**2.  多种属性    **\n");
+                                    printf("**3.  预设统计    **\n");
+                                    printf("**4.  条件统计    **\n");
+                                    printf("**                **\n");
+                                    printf("********************\n");
+                                    printf("请选择：");
+                                    scanf_s("%d", &choice_20);
+                                    clear();
+                                    switch (choice_20)
+                                    {
+                                    case 0:
+                                        jug15 = 0;
+                                        break;
+                                    case 1:
+                                        jug16 = 1;
+                                        while (jug16)
+                                        {
+                                            printf("******单一属性统计******\n");
+                                            printf("**                   **\n");
+                                            printf("**  0.退       出     **\n");
+                                            printf("**  1.楼层    统计    **\n");
+                                            printf("**  2.朝向    统计    **\n");
+                                            printf("**  3.租金    统计    **\n");
+                                            printf("**  4.面积    统计    **\n");
+                                            printf("**  5.房间数  统计    **\n");
+                                            printf("**  6.装修情况统计    **\n");
+                                            printf("**                   **\n");
+                                            printf("***********************\n");
+                                            printf("请选择：");
+                                            scanf_s("%d", &choice_21);
+                                            clear();
+                                            switch (choice_21)
+                                            {
+                                            case 0:
+                                                jug16 = 0;
+                                                break;
+                                            case 1:
+                                                statisHousesFloor(house_head);
+                                                continue;
+                                            case 2:
+                                                statisHousesToward(house_head);
+                                                continue;
+                                            case 3:
+                                                statisHousesRent(house_head);
+                                                continue;
+                                            case 4:
+                                                statisHousesArea(house_head);
+                                                continue;
+                                            case 5:
+                                                statisHousesRoom(house_head);
+                                                continue;
+                                            case 6:
+                                                statisHousesFitment(house_head);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                        continue;
+                                    case 2:
+                                        jug17 = 1;
+                                        while (jug17)
+                                        {
+                                            printf("********多种属性统计********\n");
+                                            printf("**                       **\n");
+                                            printf("**  0.退           出    **\n");
+                                            printf("**  1.租金和面积  统计    **\n");
+                                            printf("**  2.朝向和楼层  统计    **\n");
+                                            printf("**  3.租金和装修  统计    **\n");
+                                            printf("**  4.小区和楼层  统计    **\n");
+                                            printf("**  5.房间数和朝向统计    **\n");
+                                            printf("**                       **\n");
+                                            printf("***************************\n");
+                                            printf("请选择：");
+                                            scanf_s("%d", &choice_22);
+                                            clear();
+                                            switch (choice_22)
+                                            {
+                                            case 0:
+                                                jug17 = 0;
+                                                break;
+                                            case 1:
+                                                statisRentAndArea(house_head);
+                                                continue;
+                                            case 2:
+                                                statisTowardAndFloor(house_head);
+                                                continue;
+                                            case 3:
+                                                statisRentAndFitment(house_head);
+                                                continue;
+                                            case 4:
+                                                statisCommunityAndFloor(house_head);
+                                                continue;
+                                            case 5:
+                                                statisRoomAndToward(house_head);
+                                                continue;
+
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                        continue;
+                                    case 3:
+                                        jug18 = 1;
+                                        while (jug18)
+                                        {
+                                            printf("********预设统计********\n");
+                                            printf("**                    **\n");
+                                            printf("**  0.退       出     **\n");
+                                            printf("**  1.平均出租时间     **\n");
+                                            printf("**  2.出   租   率    **\n");
+                                            printf("**                    **\n");
+                                            printf("***********************\n");
+                                            printf("请选择：");
+                                            scanf_s("%d", &choice_23);
+                                            clear();
+                                            switch (choice_23)
+                                            {
+                                            case 0:
+                                                jug18 = 0;
+                                                break;
+                                            case 1:
+                                                statisAverageRentDuration(house_head);
+                                                continue;
+                                            case 2:
+                                                statisOccupancyRate(house_head);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                        continue;
+                                    case 4:
+
+                                    default:
+                                        printf("无效选项，请重新选择。\n");
+                                        getchar();
+                                        clear();
+                                        continue;
+                                    }
+                                }
+                                continue;
+                            case 2:
+                                jug19 = 1;
+                                while (jug19)
+                                {
+                                    printf("******预约统计******\n");
+                                    printf("**                **\n");
+                                    printf("**0.  退    出    **\n");
+                                    printf("**1.  总    数    **\n");
+                                    printf("**2.  预约完成    **\n");
+                                    printf("**3.  看房时长    **\n");
+                                    printf("**4.  预约时间    **\n");
+                                    printf("**5.  租    客    **\n");
+                                    printf("**                **\n");
+                                    printf("********************\n");
+                                    printf("请选择：");
+                                    scanf_s("%d", &choice_24);
+                                    clear();
+                                    switch (choice_24)
+                                    {
+                                    case 0:
+                                        jug19 = 0;
+                                        break;
+                                    case 1:
+                                        statisTotalAppointments(head2);
+                                        continue;
+                                    case 2:
+                                        statisCompletedAppointments(head2);
+                                        continue;
+                                    case 3:
+                                        statisAppointmentDuration(head2);
+                                        continue;
+                                    case 4:
+                                        statisAppointmentInPeriod(head2);
+                                        continue;
+                                    case 5:
+                                        statisAppointmentByTenant(head2);
+                                        continue;
+                                    default:
+                                        printf("无效选项，请重新选择。\n");
+                                        getchar();
+                                        clear();
+                                        continue;
+                                    }
+                                }
+                                continue;
+                            case 3:
+                                jug20 = 1;
+                                while (jug20)
+                                {
+                                    printf("******租房统计******\n");
+                                    printf("**                **\n");
+                                    printf("**0.  退    出    **\n");
+                                    printf("**1.  总    数    **\n");
+                                    printf("**2.  合同日期    **\n");
+                                    printf("**3.  租房日期    **\n");
+                                    printf("**4.  出租时长    **\n");
+                                    printf("**5.  租    客    **\n");
+                                    printf("**                **\n");
+                                    printf("********************\n");
+                                    printf("请选择：");
+                                    scanf_s("%d", &choice_25);
+                                    clear();
+                                    switch (choice_25)
+                                    {
+                                    case 0:
+                                        jug20 = 0;
+                                        break;
+                                    case 1:
+                                        statisTotalRents(head1);
+                                        continue;
+                                    case 2:
+                                        statisRentDate(head1);
+                                        continue;
+                                    case 3:
+                                        statisContractDate(head1);
+                                        continue;
+                                    case 4:
+                                        statisRentDuration(head1);
+                                        continue;
+                                    case 5:
+                                        statisTenant(head1);
+                                        continue;
+                                    default:
+                                        printf("无效选项，请重新选择。\n");
+                                        getchar();
+                                        clear();
+                                        continue;
+                                    }
+                                }
+                                continue;
                             default:
                                 printf("无效选项，请重新输入\n");
                                 getchar();
@@ -814,10 +1465,8 @@ int main() {
                     printf("**1.     修改信息       **\n");
                     printf("**2.     看房预约       **\n");
                     printf("**3.     信息查询       **\n");
-                    printf("**4.     信息排序       **\n");
-                    printf("**5.     信息统计       **\n");
-                    printf("**6.     更改密码       **\n");
-                    printf("**7.     删除账户       **\n");
+                    printf("**4.     更改密码       **\n");
+                    printf("**5.     删除账户       **\n");
                     printf("**                      **\n");
                     printf("**************************\n");
                     printf("请选择功能：");
@@ -887,7 +1536,8 @@ int main() {
                             printf("**                **\n");
                             printf("**0.  退    出    **\n");
                             printf("**1.  房源信息    **\n");
-                            printf("**2.  租房信息    **\n");
+                            printf("**2.  预约信息    **\n");
+                            printf("**3.  租房信息    **\n");
                             printf("**                **\n");
                             printf("********************\n");
                             printf("请选择：");
@@ -1008,6 +1658,9 @@ int main() {
                                 }
                                 break;
                             case 2:
+                                printMyAppointmentsInOrder(head2, p1);
+                                continue;
+                            case 3:
                                 printMyRentsInOrder(head1, p1);
                                 continue;
                             default:
@@ -1019,67 +1672,9 @@ int main() {
                         }
                         break;
                     case 4:
-                        jug4 = 1;
-                        while (jug4)
-                        {
-                            //信息排序界面
-                            printf("******信息排序******\n");
-                            printf("**                **\n");
-                            printf("**0.  退    出    **\n");
-                            printf("**1.  房源信息    **\n");
-                            printf("**2.  预约信息    **\n");
-                            printf("**3.  租房信息    **\n");
-                            printf("**                **\n");
-                            printf("********************\n");
-                            printf("请选择：");
-                            scanf_s("%d", &choice_8);
-                            clear();
-                            switch (choice_8)
-                            {
-                            case 0:
-                                jug4 = 0;
-                                break;
-                            default:
-                                printf("无效选项，请重新输入\n");
-                                getchar();
-                                clear();
-                                continue;
-                            }
-                        }
-                        break;
-                    case 5:
-                        jug5 = 1;
-                        while (jug5)
-                        {
-                            //信息统计界面
-                            printf("******信息统计******\n");
-                            printf("**                **\n");
-                            printf("**0.  退    出    **\n");
-                            printf("**1.  房源信息    **\n");
-                            printf("**2.  预约信息    **\n");
-                            printf("**3.  租房信息    **\n");
-                            printf("**                **\n");
-                            printf("********************\n");
-                            printf("请选择：");
-                            scanf_s("%d", &choice_9);
-                            clear();
-                            switch (choice_9)
-                            {
-                            case 0:
-                                jug5 = 0;
-                                break;
-                            default:
-                                printf("无效选项，请重新输入\n");
-                                getchar();
-                                clear();
-                                continue;
-                            }
-                        }
-                        break;
-                    case 6:
                         updateMyPassword(p1);
                         continue;
-                    case 7:
+                    case 5:
                         deleteMyUser(p1, tail);
                         jug0 = 0;
                         break;

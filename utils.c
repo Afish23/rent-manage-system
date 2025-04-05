@@ -88,3 +88,19 @@ void clear()
 	else
 		clear();
 }
+
+void printList(struct Rent* head) {
+	struct Rent* current = head;
+	while (current != NULL) {
+		printf("id: %d\n", current->id);
+		printf("contractTime: %d\n", current->contractTime);
+		printf("rentStartTime: %d\n", current->rentStartTime);
+		printf("rentDuration: %d\n", current->rentDuration);
+		printf("statement: %d\n", current->statement);
+		printf("------------------------\n");
+		//break;
+		current = current->next;
+	}
+	getchar();
+	clear();
+}

@@ -33,6 +33,12 @@
     <ClInclude Include="inquire.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="statistics.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data.c">
@@ -53,18 +59,24 @@
     <ClCompile Include="inquire.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="statistics.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sort.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="user.bin">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="house.bin">
       <Filter>资源文件</Filter>
     </None>
     <None Include="rent.bin">
       <Filter>资源文件</Filter>
     </None>
     <None Include="appointment.bin">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="house.bin">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

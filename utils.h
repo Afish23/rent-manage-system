@@ -10,3 +10,6 @@ void hideInput(char* buffer, int maxLength);
 
 //用于清屏
 void clear();
+
+//用于打印租房排序信息
+void printList(struct Rent* head);
