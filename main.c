@@ -15,14 +15,14 @@ int main() {
         //13：查找菜单 14：简单查询菜单 15：范围查询菜单 16：组合查询菜单
         choice_13, choice_14, choice_15, choice_16,
         //17： 18：租房管理菜单 19:租房信息更改菜单
-        choice_17, choice_18, choice_19, choice_20;
+        choice_17, choice_18, choice_19, choice_20, choice_21;
     //退出循环判断
         //0：身份选择 1:中介管理 2:房源管理 3:信息查询 4:信息排序 
     int jug0 = 0, jug1 = 0, jug2 = 0, jug3 = 0, jug4 = 0,
         //5:信息统计 6:看房管理 7:租房管理 8:看房预约 9:查询方式
         jug5 = 0, jug6 = 0, jug7 = 0, jug8 = 0, jug9 = 0,
         //10：简单查询 11：范围查询 12：组合查询 13：租房管理 14:租房信息更改
-        jug10 = 0, jug11 = 0, jug12 = 0, jug13 = 0, jug14 = 0,jug15=0;
+        jug10 = 0, jug11 = 0, jug12 = 0, jug13 = 0, jug14 = 0, jug15 = 0,jug16=0;
 
 
     struct User* p1, * p2, * tail, * head;
@@ -747,48 +747,108 @@ int main() {
                             case 1:
                             case 2:
                             case 3:
-                                jug15 = 1;
-                                while (jug15) {
+                                jug16 = 1;
+                                while (jug16) {
                                     printf("******租房信息排序******\n");
                                     printf("**                    **\n");
                                     printf("**0.  退    出        **\n");
-                                    printf("**1.  按租房编号排序  **\n");
-                                    printf("**2.  按合同签订日期排序**\n");
-                                    printf("**3.  按出租开始日期排序**\n");
-                                    printf("**4.  按预计出租时长排序**\n");
-                                    printf("**5.  按出租状态排序    **\n");
-                                    printf("**                    **\n");
+                                    printf("**1.  单一排序        **\n");
+                                    printf("**2.  多重排序        **\n");
+                                    printf("**                   **\n");
                                     printf("************************\n");
                                     printf("请选择排序方式:\n");
-                                    scanf_s("%d", &choice_20);
+                                    scanf_s("%d", &choice_21);
                                     clear();
-                                    switch (choice_20) {
-                                    case 0:
-                                        jug15 = 0;
+                                    if (choice_21 == 0) {
+                                        jug16 = 0;
                                         break;
-                                    case 1:
-                                        simpleSortid(&((head1)->next));
-                                        continue;
-                                    case 2:
-                                        simpleSortByContractTime(&((head1)->next));
-                                        continue;
-                                    case 3:
-                                        simpleSortByRentStartTime(&((head1)->next));
-                                        continue;
-                                    case 4:
-                                        simpleSortByRentDuration(&((head1)->next));
-                                        continue;
-                                    case 5:
-                                        simpleSortByStatement(&((head1)->next));
-                                        continue;
-                                    default:
-                                        printf("无效选项，请重新选择。\n");
-                                        getchar();
-                                        clear();
-                                        continue;
+                                    }
+                                    else if(choice_21 == 1){
+                                        jug15 = 1;
+                                        while (jug15) {
+                                            printf("******租房信息排序******\n");
+                                            printf("**                    **\n");
+                                            printf("**0.  退    出        **\n");
+                                            printf("**1.  按租房编号排序  **\n");
+                                            printf("**2.  按合同签订日期排序**\n");
+                                            printf("**3.  按出租开始日期排序**\n");
+                                            printf("**4.  按预计出租时长排序**\n");
+                                            printf("**5.  按出租状态排序    **\n");
+                                            printf("**                    **\n");
+                                            printf("************************\n");
+                                            printf("请选择排序方式:\n");
+                                            scanf_s("%d", &choice_20);
+                                            clear();
+                                            switch (choice_20) {
+                                            case 0:
+                                                jug15 = 0;
+                                                break;
+                                            case 1:
+                                                simpleSortid(&((head1)->next));
+                                                printList((head1)->next);
+                                                continue;
+                                            case 2:
+                                                simpleSortByContractTime(&((head1)->next));
+                                                printList((head1)->next);
+                                                continue;
+                                            case 3:
+                                                simpleSortByRentStartTime(&((head1)->next));
+                                                printList((head1)->next);
+                                                continue;
+                                            case 4:
+                                                simpleSortByRentDuration(&((head1)->next));
+                                                printList((head1)->next);
+                                                continue;
+                                            case 5:
+                                                simpleSortByStatement(&((head1)->next));
+                                                printList((head1)->next);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                    }/**/
+                                    else if (choice_21 == 2) {
+                                        jug15 = 1;
+                                        while (jug15) {
+                                            printf("******租房信息多重排序(前者优先)******\n");
+                                            printf("**                    **\n");
+                                            printf("**0.  退    出        **\n");
+                                            printf("**1.  按租房编号排序  **\n");
+                                            printf("**2.  按合同签订日期排序**\n");
+                                            printf("**3.  按出租开始日期排序**\n");
+                                            printf("**4.  按预计出租时长排序**\n");
+                                            printf("**5.  按出租状态排序    **\n");
+                                            printf("**                    **\n");
+                                            printf("************************\n");
+                                            printf("请选择排序方式:\n");
+                                            scanf_s("%d%d", &choice_20, &choice_21);
+                                            clear();
+                                            switch (choice_20) {
+                                            case 0:
+                                                jug16 = 0;
+                                                break;
+                                            case 1:
+                                                simpleSortid(&((head1)->next));
+                                                switch (choice_21) {
+                                                case 4:
+                                                multSortid_ByRentDuration(&((head1)->next));
+                                                }
+                                                printList((head1)->next);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
                                     }
                                 }
-                                break;
+                                
                             default:
                                 printf("无效选项，请重新输入\n");
                                 getchar();

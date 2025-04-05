@@ -9,7 +9,7 @@ void simpleSortid(struct Rent** head) {
     printf("2.从大到小\n");
     scanf("%d", &choice1);
     if (choice1 == 1) {
-        while (current != NULL) {
+        while (current->next != NULL) {
             int id1 = current->id;
             struct Rent* minNode = current;
             struct Rent* p = current->next;
@@ -29,13 +29,12 @@ void simpleSortid(struct Rent** head) {
                     *head = current;
                 }
                 // 由于交换后 current 位置改变，需要重新获取当前位置
-                current = minNode;
             }
             current = current->next;
         }
     }
     if (choice1 == 2) {
-        while (current != NULL) {
+        while (current->next != NULL) {
             int id1 = current->id;
             struct Rent* maxNode = current;
             struct Rent* p = current->next;
@@ -55,12 +54,11 @@ void simpleSortid(struct Rent** head) {
                     *head = current;
                 }
                 // 由于交换后 current 位置改变，需要重新获取当前位置
-                current = maxNode;
             }
             current = current->next;
         }
     }
-    printList((*head));
+    //printList((*head));
 }
 // 按 contractTime 排序
 void simpleSortByContractTime(struct Rent** head) {
@@ -72,7 +70,7 @@ void simpleSortByContractTime(struct Rent** head) {
     scanf("%d", &choice1);
 
     if (choice1 == 1) {
-        while (current != NULL) {
+        while (current->next != NULL) {
             int id1 = current->contractTime;
             struct Rent* minNode = current;
             struct Rent* p = current->next;
@@ -90,13 +88,12 @@ void simpleSortByContractTime(struct Rent** head) {
                 if (*head == minNode) {
                     *head = current;
                 }
-                current = minNode;
             }
             current = current->next;
         }
     }
     if (choice1 == 2) {
-        while (current != NULL) {
+        while (current->next != NULL) {
             int id1 = current->contractTime;
             struct Rent* maxNode = current;
             struct Rent* p = current->next;
@@ -114,12 +111,11 @@ void simpleSortByContractTime(struct Rent** head) {
                 if (*head == maxNode) {
                     *head = current;
                 }
-                current = maxNode;
             }
             current = current->next;
         }
     }
-    printList((*head));
+   // printList((*head));
 }
 
 // 按 rentStartTime 排序
@@ -132,7 +128,7 @@ void simpleSortByRentStartTime(struct Rent** head) {
     scanf("%d", &choice1);
 
     if (choice1 == 1) {
-        while (current != NULL) {
+        while (current->next != NULL) {
             int id1 = current->rentStartTime;
             struct Rent* minNode = current;
             struct Rent* p = current->next;
@@ -150,13 +146,12 @@ void simpleSortByRentStartTime(struct Rent** head) {
                 if (*head == minNode) {
                     *head = current;
                 }
-                current = minNode;
             }
             current = current->next;
         }
     }
     if (choice1 == 2) {
-        while (current != NULL) {
+        while (current->next != NULL) {
             int id1 = current->rentStartTime;
             struct Rent* maxNode = current;
             struct Rent* p = current->next;
@@ -174,12 +169,11 @@ void simpleSortByRentStartTime(struct Rent** head) {
                 if (*head == maxNode) {
                     *head = current;
                 }
-                current = maxNode;
             }
             current = current->next;
         }
     }
-    printList((*head));
+    //printList((*head));
 }
 
 // 按 rentDuration 排序
@@ -192,7 +186,7 @@ void simpleSortByRentDuration(struct Rent** head) {
     scanf("%d", &choice1);
 
     if (choice1 == 1) {
-        while (current != NULL) {
+        while (current->next != NULL) {
             int id1 = current->rentDuration;
             struct Rent* minNode = current;
             struct Rent* p = current->next;
@@ -210,13 +204,12 @@ void simpleSortByRentDuration(struct Rent** head) {
                 if (*head == minNode) {
                     *head = current;
                 }
-                current = minNode;
             }
             current = current->next;
         }
     }
     if (choice1 == 2) {
-        while (current != NULL) {
+        while (current->next != NULL) {
             int id1 = current->rentDuration;
             struct Rent* maxNode = current;
             struct Rent* p = current->next;
@@ -234,12 +227,11 @@ void simpleSortByRentDuration(struct Rent** head) {
                 if (*head == maxNode) {
                     *head = current;
                 }
-                current = maxNode;
             }
             current = current->next;
         }
     }
-    printList((*head));
+    //printList((*head));
 }
 
 // 按 statement 排序
@@ -252,7 +244,7 @@ void simpleSortByStatement(struct Rent** head) {
     scanf("%d", &choice1);
 
     if (choice1 == 1) {
-        while (current != NULL) {
+        while (current->next != NULL) {
             int id1 = current->statement;
             struct Rent* minNode = current;
             struct Rent* p = current->next;
@@ -270,13 +262,12 @@ void simpleSortByStatement(struct Rent** head) {
                 if (*head == minNode) {
                     *head = current;
                 }
-                current = minNode;
             }
             current = current->next;
         }
     }
     if (choice1 == 2) {
-        while (current != NULL) {
+        while (current->next != NULL) {
             int id1 = current->statement;
             struct Rent* maxNode = current;
             struct Rent* p = current->next;
@@ -294,41 +285,135 @@ void simpleSortByStatement(struct Rent** head) {
                 if (*head == maxNode) {
                     *head = current;
                 }
-                current = maxNode;
             }
             current = current->next;
         }
     }
-    printList((*head));
+    //printList((*head));
 }
+
+//第二次排rentDuration
+void multSortid_ByRentDuration(struct Rent** head) {
+    int choice1;
+    struct Rent* current = *head;
+    printf("这是首排id次排rentDuration的排序：\n");
+    printf("请选择你需要rentDuration的排序方式：\n");
+    printf("1.从小到大\n");
+    printf("2.从大到小\n");
+    scanf("%d", &choice1);
+
+    if (choice1 == 1) {
+        while (current->next != NULL) {
+            int id1 = current->rentDuration;
+            int id2 = current->id;
+            struct Rent* minNode = current;
+            struct Rent* p = current->next;
+
+            while (p != NULL) {
+                if (p->rentDuration < id1&&id2==p->id) {
+                    id1 = p->rentDuration;
+                    minNode = p;
+                }
+                p = p->next;
+            }
+
+            if (minNode != current) {
+                swap(&current, &minNode);
+                if (*head == minNode) {
+                    *head = current;
+                }
+            }
+            current = current->next;
+        }
+    }
+    if (choice1 == 2) {
+        while (current->next != NULL) {
+            int id1 = current->rentDuration;
+            int id2 = current->id;
+            struct Rent* maxNode = current;
+            struct Rent* p = current->next;
+
+            while (p != NULL) {
+                if (p->rentDuration > id1 && id2 == p->id) {
+                    id1 = p->rentDuration;
+                    maxNode = p;
+                }
+                p = p->next;
+            }
+
+            if (maxNode != current) {
+                swap(&current, &maxNode);
+                if (*head == maxNode) {
+                    *head = current;
+                }
+            }
+            current = current->next;
+        }
+    }
+    //printList((*head));
+}
+//printList((*head));
 void swap(struct Rent** head1, struct Rent** head2) {
+    // 确保链表不为空
     if (*head1 == NULL || *head2 == NULL) {
         printf("其中一个链表为空，无法交换。\n");
         return;
     }
 
-    // 处理 *head1 的前一个节点
-    if ((*head1)->prev != NULL) {
-        (*head1)->prev->next = *head2;
-    }
-    // 处理 *head2 的后一个节点
-    if ((*head2)->next != NULL) {
-        (*head2)->next->prev = *head1;
-    }
+    // 如果交换的是相邻节点
+    if ((*head1)->next == *head2) {
+        // head1 是前节点，head2 是后节点
+        struct Rent* temp = *head2;
+        (*head1)->next = temp->next;
+        if (temp->next != NULL) {
+            temp->next->prev = *head1;
+        }
+        temp->prev = (*head1)->prev;
+        if ((*head1)->prev != NULL) {
+            (*head1)->prev->next = temp;
+        }
+        temp->next = *head1;
+        (*head1)->prev = temp;
 
-    // 交换头节点的 next 和 prev 指针
-    struct Rent* tempNext = (*head1)->next;
-    struct Rent* tempPrev = (*head2)->prev;
-    (*head1)->next = (*head2)->next;
-    (*head2)->prev = (*head1)->prev;
-    (*head1)->prev = tempPrev;
-    (*head2)->next = tempNext;
+        // 更新 head1 和 head2
+        *head1 = temp;
+        *head2 = (*head1)->next;
+    }
+    // 如果是交换不相邻的节点
+    else {
+        // 交换节点时临时保存指针
+        struct Rent* tempNext1 = (*head1)->next;
+        struct Rent* tempPrev1 = (*head1)->prev;
+        struct Rent* tempNext2 = (*head2)->next;
+        struct Rent* tempPrev2 = (*head2)->prev;
 
-    // 交换头指针
-    struct Rent* temp = *head1;
-    *head1 = *head2;
-    *head2 = temp;
+        // 更新 head1 和 head2 的指针
+        (*head1)->next = tempNext2;
+        (*head1)->prev = tempPrev2;
+        (*head2)->next = tempNext1;
+        (*head2)->prev = tempPrev1;
+
+        // 更新其他节点的 prev 和 next 指针
+        if (tempNext1 != NULL) {
+            tempNext1->prev = *head2;
+        }
+        if (tempPrev1 != NULL) {
+            tempPrev1->next = *head2;
+        }
+        if (tempNext2 != NULL) {
+            tempNext2->prev = *head1;
+        }
+        if (tempPrev2 != NULL) {
+            tempPrev2->next = *head1;
+        }
+
+        // 更新 head1 和 head2
+        struct Rent* temp = *head1;
+        *head1 = *head2;
+        *head2 = temp;
+    }
 }
+
 
 /*
 void multSortid(struct Rent** head) {
