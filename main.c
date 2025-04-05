@@ -189,7 +189,8 @@ int main() {
                         }
                         break;
                     case 2:
-
+                        appointAgent(head2);
+                        continue;
                     case 3:
                         jug3 = 1;
                         while (jug3)
@@ -514,6 +515,15 @@ int main() {
                             case 0:
                                 jug6 = 0;
                                 break;
+                            case 1:
+                                handleAppointment(head2, p1);
+                                continue;
+                            case 2:
+                                updateAppointment(head2);
+                                continue;
+                            case 3:
+                                deleteAppointment(head2);
+                                continue;
                             default:
                                 printf("无效选项，请重新选择。\n");
                                 getchar();
@@ -545,7 +555,10 @@ int main() {
                                 jug7 = 0;
                                 break;
                             case 1: 
-                                addRent(&tail1);
+                                addRent(&tail1, p1, house_head);
+                                continue;
+                            case 2:
+                                printRentsInOrder(head1);
                                 continue;
                             case 3: 
                                 updateRent(head1);
@@ -569,9 +582,10 @@ int main() {
                             printf("******信息查询******\n");
                             printf("**                **\n");
                             printf("**0.  退    出    **\n");
-                            printf("**1.  房源信息    **\n");
-                            printf("**2.  预约信息    **\n");
-                            printf("**3.  租房信息    **\n");
+                            printf("**1.  用户信息    **\n");
+                            printf("**2.  房源信息    **\n");
+                            printf("**3.  预约信息    **\n");
+                            printf("**4.  租房信息    **\n");
                             printf("**                **\n");
                             printf("********************\n");
                             printf("请选择：");
@@ -582,8 +596,126 @@ int main() {
                             case 0:
                                 jug3 = 0;
                                 break;
+                            case 1:
+                                printUsersInOrder(head);
+                                continue;
+                            case 2:
+                                jug9 = 1;
+                                while (jug9)
+                                {
+                                    printf("*********查询方式*********\n");
+                                    printf("**                      **\n");
+                                    printf("**0.     退    出       **\n");
+                                    printf("**1.     简单查找       **\n");
+                                    printf("**2.     范围查找       **\n");
+                                    printf("**3.     组合查找       **\n");
+                                    printf("**                      **\n");
+                                    printf("**************************\n");
+                                    printf("请选择查找方式:\n");
+                                    scanf_s("%d", &choice_13);
+                                    clear();
+                                    switch (choice_13)
+                                    {
+                                    case 0:
+                                        jug9 = 0;
+                                        break;
+                                    case 1:
+                                        jug10 = 1;
+                                        while (jug10)
+                                        {
+                                            printf("*********查询方式*********\n");
+                                            printf("**                      **\n");
+                                            printf("**0.     退    出       **\n");
+                                            printf("**1.     所 在 市       **\n");
+                                            printf("**2.     所在县/区      **\n");
+                                            printf("**3.     所在小区       **\n");
+                                            printf("**4.     朝    向       **\n");
+                                            printf("**5.     室    厅       **\n");
+                                            printf("**6.     装修情况       **\n");
+                                            printf("**                      **\n");
+                                            printf("**************************\n");
+                                            scanf_s("%d", &choice_14);
+                                            clear();
+                                            switch (choice_14)
+                                            {
+                                            case 0:
+                                                jug10 = 0;
+                                                break;
+                                            case 1:
+                                                simpleQueryHouse1(house_head);
+                                                continue;
+                                            case 2:
+                                                simpleQueryHouse2(house_head);
+                                                continue;
+                                            case 3:
+                                                simpleQueryHouse3(house_head);
+                                                continue;
+                                            case 4:
+                                                simpleQueryHouse4(house_head);
+                                                continue;
+                                            case 5:
+                                                simpleQueryHouse5(house_head);
+                                                continue;
+                                            case 6:
+                                                simpleQueryHouse6(house_head);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                        break;
+                                    case 2:
+                                        jug11 = 1;
+                                        while (jug11)
+                                        {
+                                            printf("*********查询方式*********\n");
+                                            printf("**                      **\n");
+                                            printf("**0.     退    出       **\n");
+                                            printf("**1.     租    金       **\n");
+                                            printf("**2.     楼    层       **\n");
+                                            printf("**3.     面    积       **\n");
+                                            printf("**                      **\n");
+                                            printf("**************************\n");
+                                            scanf_s("%d", &choice_15);
+                                            clear();
+                                            switch (choice_15) {
+                                            case 0:
+                                                jug11 = 0;
+                                                break;
+                                            case 1:
+                                                rangeQueryRent(house_head);
+                                                continue;
+                                            case 2:
+                                                rangeQueryFloor(house_head);
+                                                continue;
+                                            case 3:
+                                                rangeQueryArea(house_head);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                        break;
+                                    case 3:
+                                        combinedQueryHouse(head);
+                                        continue;
+                                    }
+                                }
+                                break;
+                            case 3:
+                                printAppointmentsInOrder(head2);
+                                continue;
+                            case 4:
+                                printRentsInOrder(head1);
+                                continue;
                             default:
-                                printf("无效选项，请重新输入\n");
+                                printf("无效选项，请重新选择。\n");
                                 getchar();
                                 clear();
                                 continue;
@@ -724,13 +856,19 @@ int main() {
                                 jug8 = 0;
                                 break;
                             case 1: 
-                                addAppointment(&tail2);
+                                addAppointment(&tail2, p1);
+                                continue;
+                            case 2:
+                                printMyAppointmentsInOrder(head2, p1);
                                 continue;
                             case 3:
                                 updateAppointment(head2);
                                 continue;
                             case 4:
                                 deleteAppointment(head2);
+                                continue;
+                            case 5:
+                                addFeedback(head2, p1);
                                 continue;
                             default:
                                 printf("无效选项，请重新输入\n");
@@ -749,8 +887,7 @@ int main() {
                             printf("**                **\n");
                             printf("**0.  退    出    **\n");
                             printf("**1.  房源信息    **\n");
-                            printf("**2.  预约信息    **\n");
-                            printf("**3.  租房信息    **\n");
+                            printf("**2.  租房信息    **\n");
                             printf("**                **\n");
                             printf("********************\n");
                             printf("请选择：");
@@ -761,6 +898,120 @@ int main() {
                             case 0:
                                 jug3 = 0;
                                 break;
+                            case 1:
+                                jug9 = 1;
+                                while (jug9)
+                                {
+                                    printf("*********查询方式*********\n");
+                                    printf("**                      **\n");
+                                    printf("**0.     退    出       **\n");
+                                    printf("**1.     简单查找       **\n");
+                                    printf("**2.     范围查找       **\n");
+                                    printf("**3.     组合查找       **\n");
+                                    printf("**                      **\n");
+                                    printf("**************************\n");
+                                    printf("请选择查找方式:\n");
+                                    scanf_s("%d", &choice_13);
+                                    clear();
+                                    switch (choice_13)
+                                    {
+                                    case 0:
+                                        jug9 = 0;
+                                        break;
+                                    case 1:
+                                        jug10 = 1;
+                                        while (jug10)
+                                        {
+                                            printf("*********查询方式*********\n");
+                                            printf("**                      **\n");
+                                            printf("**0.     退    出       **\n");
+                                            printf("**1.     所 在 市       **\n");
+                                            printf("**2.     所在县/区      **\n");
+                                            printf("**3.     所在小区       **\n");
+                                            printf("**4.     朝    向       **\n");
+                                            printf("**5.     室    厅       **\n");
+                                            printf("**6.     装修情况       **\n");
+                                            printf("**                      **\n");
+                                            printf("**************************\n");
+                                            scanf_s("%d", &choice_14);
+                                            clear();
+                                            switch (choice_14)
+                                            {
+                                            case 0:
+                                                jug10 = 0;
+                                                break;
+                                            case 1:
+                                                simpleQueryHouse1(house_head);
+                                                continue;
+                                            case 2:
+                                                simpleQueryHouse2(house_head);
+                                                continue;
+                                            case 3:
+                                                simpleQueryHouse3(house_head);
+                                                continue;
+                                            case 4:
+                                                simpleQueryHouse4(house_head);
+                                                continue;
+                                            case 5:
+                                                simpleQueryHouse5(house_head);
+                                                continue;
+                                            case 6:
+                                                simpleQueryHouse6(house_head);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                        break;
+                                    case 2:
+
+
+                                        jug11 = 1;
+                                        while (jug11)
+                                        {
+                                            printf("*********查询方式*********\n");
+                                            printf("**                      **\n");
+                                            printf("**0.     退    出       **\n");
+                                            printf("**1.     租    金       **\n");
+                                            printf("**2.     楼    层       **\n");
+                                            printf("**3.     面    积       **\n");
+                                            printf("**                      **\n");
+                                            printf("**************************\n");
+                                            scanf_s("%d", &choice_15);
+                                            clear();
+                                            switch (choice_15) {
+                                            case 0:
+                                                jug11 = 0;
+                                                break;
+                                            case 1:
+                                                rangeQueryRent(house_head);
+                                                continue;
+                                            case 2:
+                                                rangeQueryFloor(house_head);
+                                                continue;
+                                            case 3:
+                                                rangeQueryArea(house_head);
+                                                continue;
+                                            default:
+                                                printf("无效选项，请重新选择。\n");
+                                                getchar();
+                                                clear();
+                                                continue;
+                                            }
+                                        }
+                                        break;
+                                    case 3:
+                                        combinedQueryHouse(head);
+                                        continue;
+                                    }
+                                }
+                                break;
+                            case 2:
+                                printMyRentsInOrder(head1, p1);
+                                continue;
                             default:
                                 printf("无效选项，请重新输入\n");
                                 getchar();
