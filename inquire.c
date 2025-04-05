@@ -36,9 +36,11 @@ void simpleQueryHouse1(struct House* head) {
             printf("面积：%f\n", p->Area);
             printf("装修情况（已/未装修）：%s\n", p->fitment);
             printf("租金：%f\n", p->rent);
-            printf("租房日期：%d-%d\n", p->time1, p->time2);
+            printf("开始租房日期：%d\n", p->rentStartTime);
+            printf("预计出租时长：%d\n", p->rentDuration);
             printf("中介：%s\n", p->agentname);
             printf("租客：%s\n", p->tenantname);
+            printf("出租状态：%d\n", p->status);
             found = 1;
         }
         p = p->next;
@@ -96,9 +98,11 @@ void simpleQueryHouse1(struct House* head) {
                         printf("面积：%f\n", p->Area);
                         printf("装修情况（已/未装修）：%s\n", p->fitment);
                         printf("租金：%f\n", p->rent);
-                        printf("租房日期：%d-%d\n", p->time1, p->time2);
+                        printf("开始租房日期：%d\n", p->rentStartTime);
+                        printf("预计出租时长：%d\n", p->rentDuration);
                         printf("中介：%s\n", p->agentname);
                         printf("租客：%s\n", p->tenantname);
+                        printf("出租状态：%d\n", p->status);
                     }
                     p = p->next;
                 }
@@ -152,9 +156,11 @@ void simpleQueryHouse2(struct House* head) {
             printf("面积：%f\n", p->Area);
             printf("装修情况（已/未装修）：%s\n", p->fitment);
             printf("租金：%f\n", p->rent);
-            printf("租房日期：%d-%d\n", p->time1, p->time2);
+            printf("开始租房日期：%d\n", p->rentStartTime);
+            printf("预计出租时长：%d\n", p->rentDuration);
             printf("中介：%s\n", p->agentname);
             printf("租客：%s\n", p->tenantname);
+            printf("出租状态：%d\n", p->status);
             found = 1;
         }
         p = p->next;
@@ -212,9 +218,11 @@ void simpleQueryHouse2(struct House* head) {
                         printf("面积：%f\n", p->Area);
                         printf("装修情况（已/未装修）：%s\n", p->fitment);
                         printf("租金：%f\n", p->rent);
-                        printf("租房日期：%d-%d\n", p->time1, p->time2);
+                        printf("开始租房日期：%d\n", p->rentStartTime);
+                        printf("预计出租时长：%d\n", p->rentDuration);
                         printf("中介：%s\n", p->agentname);
                         printf("租客：%s\n", p->tenantname);
+                        printf("出租状态：%d\n", p->status);
                     }
                     p = p->next;
                 }
@@ -283,9 +291,11 @@ void simpleQueryHouse3(struct House* head) {
             printf("面积：%f\n", p->Area);
             printf("装修情况（已/未装修）：%s\n", p->fitment);
             printf("租金：%f\n", p->rent);
-            printf("租房日期：%d-%d\n", p->time1, p->time2);
+            printf("开始租房日期：%d\n", p->rentStartTime);
+            printf("预计出租时长：%d\n", p->rentDuration);
             printf("中介：%s\n", p->agentname);
             printf("租客：%s\n", p->tenantname);
+            printf("出租状态：%d\n", p->status);
             found = 1;
         }
         p = p->next;
@@ -361,10 +371,11 @@ void simpleQueryHouse3(struct House* head) {
                         printf("面积：%f\n", p->Area);
                         printf("装修情况（已/未装修）：%s\n", p->fitment);
                         printf("租金：%f\n", p->rent);
-                        printf("租房日期：%d-%d\n", p->time1, p->time2);
+                        printf("开始租房日期：%d\n", p->rentStartTime);
+                        printf("预计出租时长：%d\n", p->rentDuration);
                         printf("中介：%s\n", p->agentname);
                         printf("租客：%s\n", p->tenantname);
-
+                        printf("出租状态：%d\n", p->status);
                     }
                     p = p->next;
                 }
@@ -434,9 +445,11 @@ void simpleQueryHouse4(struct House* head) {
             printf("面积：%f\n", p->Area);
             printf("装修情况（已/未装修）：%s\n", p->fitment);
             printf("租金：%f\n", p->rent);
-            printf("租房日期：%d-%d\n", p->time1, p->time2);
+            printf("开始租房日期：%d\n", p->rentStartTime);
+            printf("预计出租时长：%d\n", p->rentDuration);
             printf("中介：%s\n", p->agentname);
             printf("租客：%s\n", p->tenantname);
+            printf("出租状态：%d\n", p->status);
             found = 1;
         }
         p = p->next;
@@ -504,9 +517,11 @@ void simpleQueryHouse5(struct House* head) {
             printf("面积：%f\n", p->Area);
             printf("装修情况（已/未装修）：%s\n", p->fitment);
             printf("租金：%f\n", p->rent);
-            printf("租房日期：%d-%d\n", p->time1, p->time2);
+            printf("开始租房日期：%d\n", p->rentStartTime);
+            printf("预计出租时长：%d\n", p->rentDuration);
             printf("中介：%s\n", p->agentname);
             printf("租客：%s\n", p->tenantname);
+            printf("出租状态：%d\n", p->status);
             found = 1;
         }
         p = p->next;
@@ -572,9 +587,11 @@ void simpleQueryHouse6(struct House* head) {
             printf("面积：%f\n", p->Area);
             printf("装修情况（已/未装修）：%s\n", p->fitment);
             printf("租金：%f\n", p->rent);
-            printf("租房日期：%d-%d\n", p->time1, p->time2);
+            printf("开始租房日期：%d\n", p->rentStartTime);
+            printf("预计出租时长：%d\n", p->rentDuration);
             printf("中介：%s\n", p->agentname);
             printf("租客：%s\n", p->tenantname);
+            printf("出租状态：%d\n", p->status);
             found = 1;
         }
         p = p->next;
@@ -641,9 +658,11 @@ void rangeQueryRent(struct House* head) {
             printf("面积：%f\n", p->Area);
             printf("装修情况（已/未装修）：%s\n", p->fitment);
             printf("租金：%f\n", p->rent);
-            printf("租房日期：%d-%d\n", p->time1, p->time2);
+            printf("开始租房日期：%d\n", p->rentStartTime);
+            printf("预计出租时长：%d\n", p->rentDuration);
             printf("中介：%s\n", p->agentname);
             printf("租客：%s\n", p->tenantname);
+            printf("出租状态：%d\n", p->status);
             found = 1;
         }
         p = p->next;
@@ -711,9 +730,12 @@ void rangeQueryFloor(struct House* head) {
             printf("面积：%f\n", p->Area);
             printf("装修情况（已/未装修）：%s\n", p->fitment);
             printf("租金：%f\n", p->rent);
-            printf("租房日期：%d-%d\n", p->time1, p->time2);
+            printf("开始租房日期：%d\n", p->rentStartTime);
+            printf("预计出租时长：%d\n", p->rentDuration);
+            printf("中介：%s\n", p->agentname);
             printf("中介：%s\n", p->agentname);
             printf("租客：%s\n", p->tenantname);
+            printf("出租状态：%d\n", p->status);
             found = 1;
         }
         p = p->next;
@@ -781,9 +803,11 @@ void rangeQueryArea(struct House* head) {
             printf("面积：%f\n", p->Area);
             printf("装修情况（已/未装修）：%s\n", p->fitment);
             printf("租金：%f\n", p->rent);
-            printf("租房日期：%d-%d\n", p->time1, p->time2);
+            printf("开始租房日期：%d\n", p->rentStartTime);
+            printf("预计出租时长：%d\n", p->rentDuration);
             printf("中介：%s\n", p->agentname);
             printf("租客：%s\n", p->tenantname);
+            printf("出租状态：%d\n", p->status);
             found = 1;
         }
         p = p->next;
@@ -881,9 +905,11 @@ void combinedQueryHouse(struct House* head) {
             printf("面积：%.2f\n", current->Area);
             printf("装修情况：%s\n", current->fitment);
             printf("租金：%.2f\n", current->rent);
-            printf("租房日期：%d-%d\n", current->time1, current->time2);
+            printf("开始租房日期：%d\n", current->rentStartTime);
+            printf("预计出租时长：%d\n", current->rentDuration);
             printf("中介：%s\n", current->agentname);
             printf("租客：%s\n", current->tenantname);
+            printf("出租状态：%d\n", current->status);
             found = 1;
         }
         current = current->next;

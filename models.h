@@ -38,7 +38,8 @@ struct House {
     float Area;//面积
     char fitment[10];//装修情况
     float rent, agency_fee, deposit;//费用，包括租金、中介费、押金
-    int time1, time2;//租房开始/结束日期
+    int rentStartTime;//租房开始日期
+    int rentDuration;//预计出租时长
     char agentname[20];//中介姓名
     char tenantname[20];//租客姓名
     int status;  // 0-可租 1-已租
