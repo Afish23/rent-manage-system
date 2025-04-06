@@ -18,40 +18,66 @@
     <ClInclude Include="models.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="store.h">
+    <ClInclude Include="data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="crud.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="auth.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="admin.h">
+    <ClInclude Include="inquire.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="agent.h">
+    <ClInclude Include="statistics.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="tenant.h">
+    <ClInclude Include="sort.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="store.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="auth.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="admin.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="agent.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="tenant.c">
+    <ClCompile Include="data.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="utils.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="crud.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="auth.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="inquire.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="statistics.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sort.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="user.bin">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="rent.bin">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="appointment.bin">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="house.bin">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
