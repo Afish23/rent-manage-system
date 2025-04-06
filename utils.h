@@ -11,3 +11,4 @@ void hideInput(char* buffer, int maxLength);
 //ÓÃÓÚÇåÆÁ
 void clear();
 void printList(struct Rent* head);
+void printHouseList(struct House* head);
