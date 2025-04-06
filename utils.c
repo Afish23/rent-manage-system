@@ -104,3 +104,48 @@ void printList(struct Rent* head) {
 	getchar();
 	clear();
 }
+
+void printHouseList(struct House* head) {
+	struct House* current = head;
+	while (current != NULL) {
+		printf("房屋 ID: %d\n", current->id);
+		printf("房屋编号: %d\n", current->house_id);
+		printf("房东: %s\n", current->houseowner);
+		printf("房东电话: %s\n", current->number);
+		printf("城市: %s\n", current->city);
+		printf("所在城区: %s\n", current->urban);
+		printf("小区: %s\n", current->community);
+		printf("楼层: %d\n", current->floor);
+
+		printf("朝向: ");
+		switch (current->toward) {
+		case N: printf("北\n"); break;
+		case S: printf("南\n"); break;
+		case E: printf("东\n"); break;
+		case W: printf("西\n"); break;
+		case SE: printf("东南\n"); break;
+		case NE: printf("东北\n"); break;
+		case SW: printf("西南\n"); break;
+		case SN: printf("南北\n"); break;
+		default: printf("未知\n"); break;
+		}
+
+		printf("房间数: %d\n", current->room);
+		printf("厅数: %d\n", current->hall);
+		printf("面积: %.2f\n", current->Area);
+		printf("装修情况: %s\n", current->fitment);
+		printf("租金: %.2f\n", current->rent);
+		printf("中介费: %.2f\n", current->agency_fee);
+		printf("押金: %.2f\n", current->deposit);
+		printf("租赁开始时间: %d\n", current->rentStartTime);
+		printf("租期: %d\n", current->rentDuration);
+		printf("中介姓名: %s\n", current->agentname);
+		printf("租客姓名: %s\n", current->tenantname);
+		printf("状态: %s\n", current->status == 0 ? "可租" : "已租");
+		printf("------------------------\n");
+
+		current = current->next;
+	}
+	getchar();
+	clear();
+}

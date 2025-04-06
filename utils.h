@@ -13,3 +13,6 @@ void clear();
 
 //用于打印租房排序信息
 void printList(struct Rent* head);
+
+//用于打印房源排序信息
+void printHouseList(struct House* head);
