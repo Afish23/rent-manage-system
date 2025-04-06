@@ -8,5 +8,10 @@ void simpleSortByStatement(struct Rent** head);
 
 //Rent档的多重属性排序函数
 void multSortid_ByRentDuration(struct Rent** head);
+void multSortid_ByRentStartTime(struct Rent** head);
+void multSortRentDuration_Byid(struct Rent** head);
+void multSortRentDuration_ByRentStartTime(struct Rent** head);
+void multSortRentStartTime_ByRentDuration(struct Rent** head);
+
 //Rent交换函数
 void swap(struct Rent** head1, struct Rent** head2);

@@ -350,9 +350,289 @@ void multSortid_ByRentDuration(struct Rent** head) {
             current = current->next;
         }
     }
-    //printList((*head));
 }
-//printList((*head));
+void multSortid_ByRentStartTime(struct Rent** head) {
+    int choice1;
+    struct Rent* current = *head;
+    printf("这是首排id次排rentStartTime的排序：\n");
+    printf("请选择你需要rentStartTime的排序方式：\n");
+    printf("1.从小到大\n");
+    printf("2.从大到小\n");
+    scanf("%d", &choice1);
+
+    if (choice1 == 1) {
+        while (current->next != NULL) {
+            int id1 = current->id;
+            struct Rent* minNode = current;
+            struct Rent* p = current->next;
+
+            while (p != NULL) {
+                if ((p->id == id1 && p->rentStartTime < minNode->rentStartTime)) {
+                    id1 = p->id;
+                    minNode = p;
+                }
+                p = p->next;
+            }
+
+            if (minNode != current) {
+                swap(&current, &minNode);
+                if (*head == minNode) {
+                    *head = current;
+                }
+            }
+            current = current->next;
+        }
+    }
+    if (choice1 == 2) {
+        while (current->next != NULL) {
+            int id1 = current->id;
+            struct Rent* maxNode = current;
+            struct Rent* p = current->next;
+
+            while (p != NULL) {
+                if ((p->id == id1 && p->rentStartTime > maxNode->rentStartTime)) {
+                    id1 = p->id;
+                    maxNode = p;
+                }
+                p = p->next;
+            }
+
+            if (maxNode != current) {
+                swap(&current, &maxNode);
+                if (*head == maxNode) {
+                    *head = current;
+                }
+            }
+            current = current->next;
+        }
+    }
+}
+
+
+void multSortRentDuration_Byid(struct Rent** head) {
+        int choice1;
+        struct Rent* current = *head;
+        printf("这是首排rentDuration次排id的排序：\n");
+        printf("请选择你需要rentDuration的排序方式：\n");
+        printf("1.从小到大\n");
+        printf("2.从大到小\n");
+        scanf("%d", &choice1);
+
+        if (choice1 == 1) { // 从小到大排序
+            while (current->next != NULL) {
+                int rentDuration1 = current->rentDuration;
+                struct Rent* minNode = current;
+                struct Rent* p = current->next;
+
+                while (p != NULL) {
+                    if ( (p->rentDuration == rentDuration1 && p->id < minNode->id)) {
+                        minNode = p;
+                    }
+                    p = p->next;
+                }
+
+                if (minNode != current) {
+                    swap(&current, &minNode);
+                    if (*head == minNode) {
+                        *head = current;
+                    }
+                }
+                current = current->next;
+            }
+        }
+
+        if (choice1 == 2) { // 从大到小排序
+            while (current->next != NULL) {
+                int rentDuration1 = current->rentDuration;
+                struct Rent* maxNode = current;
+                struct Rent* p = current->next;
+
+                while (p != NULL) {
+                    if ((p->rentDuration == rentDuration1 && p->id > maxNode->id)) {
+                        maxNode = p;
+                    }
+                    p = p->next;
+                }
+
+                if (maxNode != current) {
+                    swap(&current, &maxNode);
+                    if (*head == maxNode) {
+                        *head = current;
+                    }
+                }
+                current = current->next;
+            }
+        }
+    }
+
+void multSortRentDuration_ByRentStartTime(struct Rent** head) {
+    int choice1;
+    struct Rent* current = *head;
+    printf("这是首排rentDuration次排RentStartTime的排序：\n");
+    printf("请选择你需要rentDuration的排序方式：\n");
+    printf("1.从小到大\n");
+    printf("2.从大到小\n");
+    scanf("%d", &choice1);
+
+    if (choice1 == 1) { // 从小到大排序
+        while (current->next != NULL) {
+            int rentDuration1 = current->rentDuration;
+            struct Rent* minNode = current;
+            struct Rent* p = current->next;
+
+            while (p != NULL) {
+                if ((p->rentDuration == rentDuration1 && p->rentStartTime < minNode->rentStartTime)) {
+                    minNode = p;
+                }
+                p = p->next;
+            }
+
+            if (minNode != current) {
+                swap(&current, &minNode);
+                if (*head == minNode) {
+                    *head = current;
+                }
+            }
+            current = current->next;
+        }
+    }
+
+    if (choice1 == 2) { // 从大到小排序
+        while (current->next != NULL) {
+            int rentDuration1 = current->rentDuration;
+            struct Rent* maxNode = current;
+            struct Rent* p = current->next;
+
+            while (p != NULL) {
+                if ((p->rentDuration == rentDuration1 && p->rentStartTime > maxNode->rentStartTime)) {
+                    maxNode = p;
+                }
+                p = p->next;
+            }
+
+            if (maxNode != current) {
+                swap(&current, &maxNode);
+                if (*head == maxNode) {
+                    *head = current;
+                }
+            }
+            current = current->next;
+        }
+    }
+}
+
+void multSortRentStartTime_Byid(struct Rent** head) {
+    int choice2;
+    struct Rent* current = *head;
+    printf("这是首排RentStartTime次排id的排序：\n");
+    printf("请选择你需要RentStartTime的排序方式：\n");
+    printf("1.从小到大\n");
+    printf("2.从大到小\n");
+    scanf("%d", &choice2);
+
+    if (choice2 == 1) { // 从小到大排序
+        while (current->next != NULL) {
+            struct Rent* minNode = current;
+            struct Rent* p = current->next;
+
+            while (p != NULL) {
+                if ((p->rentStartTime == minNode->rentStartTime && p->id < minNode->id)) {
+                    minNode = p;
+                }
+                p = p->next;
+            }
+
+            if (minNode != current) {
+                swap(&current, &minNode);
+                if (*head == minNode) {
+                    *head = current;
+                }
+            }
+            current = current->next;
+        }
+    }
+
+    if (choice2 == 2) { // 从大到小排序
+        while (current->next != NULL) {
+            struct Rent* maxNode = current;
+            struct Rent* p = current->next;
+
+            while (p != NULL) {
+                if ( (p->rentStartTime == maxNode->rentStartTime && p->id > maxNode->id)) {
+                    maxNode = p;
+                }
+                p = p->next;
+            }
+
+            if (maxNode != current) {
+                swap(&current, &maxNode);
+                if (*head == maxNode) {
+                    *head = current;
+                }
+            }
+            current = current->next;
+        }
+    }
+}
+
+
+void multSortRentStartTime_ByRentDuration(struct Rent** head) {
+    int choice1;
+    struct Rent* current = *head;
+    printf("这是首排RentStartTime次排RentDuration的排序：\n");
+    printf("请选择你需要RentDuration的排序方式：\n");
+    printf("1.从小到大\n");
+    printf("2.从大到小\n");
+    scanf("%d", &choice1);
+
+    if (choice1 == 1) { // 从小到大排序
+        while (current->next != NULL) {
+            int rentStartTime1 = current->rentStartTime;
+            struct Rent* minNode = current;
+            struct Rent* p = current->next;
+
+            while (p != NULL) {
+                if ((p->rentStartTime == rentStartTime1 && p->rentDuration < minNode->rentDuration)) {
+                    minNode = p;
+                }
+                p = p->next;
+            }
+
+            if (minNode != current) {
+                swap(&current, &minNode);
+                if (*head == minNode) {
+                    *head = current;
+                }
+            }
+            current = current->next;
+        }
+    }
+
+    if (choice1 == 2) { // 从大到小排序
+        while (current->next != NULL) {
+            int rentStartTime1 = current->rentStartTime;
+            struct Rent* maxNode = current;
+            struct Rent* p = current->next;
+
+            while (p != NULL) {
+                if ((p->rentStartTime == rentStartTime1 && p->rentDuration > maxNode->rentDuration)) {
+                    maxNode = p;
+                }
+                p = p->next;
+            }
+
+            if (maxNode != current) {
+                swap(&current, &maxNode);
+                if (*head == maxNode) {
+                    *head = current;
+                }
+            }
+            current = current->next;
+        }
+    }
+}
+
+
 void swap(struct Rent** head1, struct Rent** head2) {
     // 确保链表不为空
     if (*head1 == NULL || *head2 == NULL) {

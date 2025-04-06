@@ -818,26 +818,79 @@ int main() {
                                             printf("**                    **\n");
                                             printf("**0.  退    出        **\n");
                                             printf("**1.  按租房编号排序  **\n");
-                                            printf("**2.  按合同签订日期排序**\n");
-                                            printf("**3.  按出租开始日期排序**\n");
-                                            printf("**4.  按预计出租时长排序**\n");
-                                            printf("**5.  按出租状态排序    **\n");
+                                            printf("**2.  按预计出租时长排序**\n");
+                                            printf("**3.  按出租开始日期排序   **\n");
                                             printf("**                    **\n");
                                             printf("************************\n");
-                                            printf("请选择排序方式:\n");
+                                            printf("请选择两种排序方式:\n");
                                             scanf_s("%d%d", &choice_20, &choice_21);
                                             clear();
                                             switch (choice_20) {
                                             case 0:
-                                                jug16 = 0;
+                                                jug15 = 0;
                                                 break;
                                             case 1:
                                                 simpleSortid(&((head1)->next));
                                                 switch (choice_21) {
-                                                case 4:
-                                                multSortid_ByRentDuration(&((head1)->next));
+                                                case 1:
+                                                    printf("您已重复输入，请重新输入\n");
+                                                    continue;
+                                                case 2:
+                                                    multSortid_ByRentDuration(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                case 3:
+                                                    multSortid_ByRentStartTime(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                default:
+                                                    printf("无效选项，请重新选择。\n");
+                                                    getchar();
+                                                    clear();
+                                                    continue;
+                                                 }
+                                                continue;
+                                            case 2:
+                                                simpleSortByRentDuration(&((head1)->next));
+                                                switch (choice_21) {
+                                                case 1:
+                                                    multSortRentDuration_Byid(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                case 2:
+                                                    printf("您已重复输入，请重新输入\n");
+                                                    continue;
+                                                case 3:
+                                                    multSortRentDuration_ByRentStartTime(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                default:
+                                                    printf("无效选项，请重新选择。\n");
+                                                    getchar();
+                                                    clear();
+                                                    continue;
                                                 }
-                                                printList((head1)->next);
+                                                continue;
+                                            case 3:
+                                                simpleSortByRentStartTime(&((head1)->next));
+                                                switch (choice_21) {
+                                                case 1:
+                                                    multSortRentStartTime_Byid(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                case 2:
+                                                    multSortRentStartTime_ByRentDuration(&((head1)->next));
+                                                    printList((head1)->next);
+                                                    continue;
+                                                case 3:
+                                                    printf("您已重复输入，请重新输入\n");
+                                                    continue;
+                                                default:
+                                                    printf("无效选项，请重新选择。\n");
+                                                    getchar();
+                                                    clear();
+                                                    continue;
+                                                }
                                                 continue;
                                             default:
                                                 printf("无效选项，请重新选择。\n");
